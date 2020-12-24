@@ -59,7 +59,8 @@
 						"browserTarget": "test-websocket:build",
 						"customWebpackConfig": {
 							"path": "webpack.config.js"
-						}
+						},
+						"proxyConfig": "apps/test-websocket/proxy.conf.json"
 					},
 					"configurations": {
 						"production": {
@@ -126,9 +127,7 @@
 					"options": {
 						"browserTarget": "test-websocket:build:production",
 						"serverTarget": "test-websocket:server:production",
-						"routes": [
-							"/"
-						]
+						"routes": ["/"]
 					},
 					"configurations": {
 						"production": {}
@@ -158,6 +157,57 @@
 					"builder": "@nrwl/linter:eslint",
 					"options": {
 						"lintFilePatterns": ["apps/test-websocket-e2e/**/*.{js,ts}"]
+					}
+				}
+			}
+		},
+		"websocket-server": {
+			"root": "apps/websocket-server",
+			"sourceRoot": "apps/websocket-server/src",
+			"projectType": "application",
+			"prefix": "websocket-server",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/node:build",
+					"outputs": ["{options.outputPath}"],
+					"options": {
+						"outputPath": "dist/apps/websocket-server",
+						"main": "apps/websocket-server/src/main.ts",
+						"tsConfig": "apps/websocket-server/tsconfig.app.json",
+						"assets": ["apps/websocket-server/src/assets"]
+					},
+					"configurations": {
+						"production": {
+							"optimization": true,
+							"extractLicenses": true,
+							"inspect": false,
+							"fileReplacements": [
+								{
+									"replace": "apps/websocket-server/src/environments/environment.ts",
+									"with": "apps/websocket-server/src/environments/environment.prod.ts"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@nrwl/node:execute",
+					"options": {
+						"buildTarget": "websocket-server:build"
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": ["apps/websocket-server/**/*.ts"]
+					}
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/apps/websocket-server"],
+					"options": {
+						"jestConfig": "apps/websocket-server/jest.config.js",
+						"passWithNoTests": true
 					}
 				}
 			}
