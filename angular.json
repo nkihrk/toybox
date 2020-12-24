@@ -10,7 +10,7 @@
 				"build": {
 					"builder": "@angular-builders/custom-webpack:browser",
 					"options": {
-						"outputPath": "dist/apps/test-websocket",
+						"outputPath": "dist/test-websocket/browser",
 						"index": "apps/test-websocket/src/index.html",
 						"main": "apps/test-websocket/src/main.ts",
 						"polyfills": "apps/test-websocket/src/polyfills.ts",
@@ -85,6 +85,53 @@
 					"options": {
 						"jestConfig": "apps/test-websocket/jest.config.js",
 						"passWithNoTests": true
+					}
+				},
+				"server": {
+					"builder": "@angular-devkit/build-angular:server",
+					"options": {
+						"outputPath": "dist/test-websocket/server",
+						"main": "apps/test-websocket/server.ts",
+						"tsConfig": "apps/test-websocket/tsconfig.server.json"
+					},
+					"configurations": {
+						"production": {
+							"outputHashing": "media",
+							"fileReplacements": [
+								{
+									"replace": "apps/test-websocket/src/environments/environment.ts",
+									"with": "apps/test-websocket/src/environments/environment.prod.ts"
+								}
+							],
+							"sourceMap": false,
+							"optimization": true
+						}
+					}
+				},
+				"serve-ssr": {
+					"builder": "@nguniversal/builders:ssr-dev-server",
+					"options": {
+						"browserTarget": "test-websocket:build",
+						"serverTarget": "test-websocket:server"
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "test-websocket:build:production",
+							"serverTarget": "test-websocket:server:production"
+						}
+					}
+				},
+				"prerender": {
+					"builder": "@nguniversal/builders:prerender",
+					"options": {
+						"browserTarget": "test-websocket:build:production",
+						"serverTarget": "test-websocket:server:production",
+						"routes": [
+							"/"
+						]
+					},
+					"configurations": {
+						"production": {}
 					}
 				}
 			}
