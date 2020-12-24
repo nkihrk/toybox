@@ -2,12 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { TailwindcssComponent } from './tailwindcss/tailwindcss.component';
 
 @NgModule({
 	declarations: [AppComponent],
-	imports: [BrowserModule],
+	imports: [BrowserModule.withServerTransition({ appId: 'serverApp' })],
 	providers: [],
-	bootstrap: [AppComponent, TailwindcssComponent]
+	bootstrap: [AppComponent]
 })
 export class AppModule {}
