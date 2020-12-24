@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "projects": {
+    "test-websocket": {
+      "projectType": "application",
+      "root": "apps/test-websocket",
+      "sourceRoot": "apps/test-websocket/src",
+      "prefix": "toybox",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/test-websocket",
+            "index": "apps/test-websocket/src/index.html",
+            "main": "apps/test-websocket/src/main.ts",
+            "polyfills": "apps/test-websocket/src/polyfills.ts",
+            "tsConfig": "apps/test-websocket/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/test-websocket/src/favicon.ico",
+              "apps/test-websocket/src/assets"
+            ],
+            "styles": ["apps/test-websocket/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/test-websocket/src/environments/environment.ts",
+                  "with": "apps/test-websocket/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "test-websocket:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "test-websocket:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "test-websocket:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/test-websocket/src/**/*.ts",
+              "apps/test-websocket/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/test-websocket"],
+          "options": {
+            "jestConfig": "apps/test-websocket/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "test-websocket-e2e": {
+      "root": "apps/test-websocket-e2e",
+      "sourceRoot": "apps/test-websocket-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/test-websocket-e2e/cypress.json",
+            "tsConfig": "apps/test-websocket-e2e/tsconfig.e2e.json",
+            "devServerTarget": "test-websocket:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "test-websocket:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/test-websocket-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "test-websocket"
+}
