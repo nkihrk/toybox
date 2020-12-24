@@ -1826,6 +1826,14 @@
     multer "1.4.2"
     tslib "2.0.3"
 
+"@nestjs/platform-socket.io@^7.6.4":
+  version "7.6.4"
+  resolved "https://registry.yarnpkg.com/@nestjs/platform-socket.io/-/platform-socket.io-7.6.4.tgz#b1eb3b309ffa3afc0a4a727a02a16e873aaf763b"
+  integrity sha512-YZHu3bzsnFY0Z7apb2pw2zx02ES31uwlJm327dJwBc2Kjh5jPsDDpDSeT4k5R1rUB/z6vXHEdqOw6Spfkf0wzw==
+  dependencies:
+    socket.io "2.3.0"
+    tslib "2.0.3"
+
 "@nestjs/schematics@^7.0.0":
   version "7.2.5"
   resolved "https://registry.yarnpkg.com/@nestjs/schematics/-/schematics-7.2.5.tgz#60945ee12136dde78cf01c706413e7676e4bf494"
@@ -1842,6 +1850,14 @@
   integrity sha512-Igj97EP5NOmR6Fc/eEBpRR+JfCbwq3n4EJyShtrR8naNZbhfB5HoxqtZvZeEEXwExQOo/AhDoDuwzCmUBcz85Q==
   dependencies:
     optional "0.1.4"
+    tslib "2.0.3"
+
+"@nestjs/websockets@^7.6.4":
+  version "7.6.4"
+  resolved "https://registry.yarnpkg.com/@nestjs/websockets/-/websockets-7.6.4.tgz#27fbb34882e2d73784a7cce5ebb009d9875c02d6"
+  integrity sha512-tURSsEvhb1WJmuPkACgj40U2sSpiEr46Z0eKf3XkPpddzy8HxUhaoWbYTmM9PEBqiJgzLAxZN0x9L+WV3TGGdg==
+  dependencies:
+    iterare "1.2.1"
     tslib "2.0.3"
 
 "@ngtools/webpack@10.2.1":
@@ -2199,6 +2215,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/engine.io@*":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@types/engine.io/-/engine.io-3.1.4.tgz#3d9472711d179daa7c95c051e50ad411e18a9bdc"
+  integrity sha512-98rXVukLD6/ozrQ2O80NAlWDGA4INg+tqsEReWJldqyi2fulC9V7Use/n28SWgROXKm6003ycWV4gZHoF8GA6w==
+  dependencies:
+    "@types/node" "*"
+
 "@types/express-serve-static-core@*":
   version "4.17.17"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.17.tgz#6ba02465165b6c9c3d8db3a28def6b16fc9b70f5"
@@ -2360,6 +2383,22 @@
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
   integrity sha512-7EJYyKTL7tFR8+gDbB6Wwz/arpGa0Mywk1TJbNzKzHtzbwVmY4HR9WqS5VV7dsBUKQmPNr192jHr/VpBluj/hg==
+
+"@types/socket.io-parser@*":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@types/socket.io-parser/-/socket.io-parser-2.2.1.tgz#dc94aed303839487f4975249a32a548109ea3647"
+  integrity sha512-+JNb+7N7tSINyXPxAJb62+NcpC1x/fPn7z818W4xeNCdPTp6VsO/X8fCsg6+ug4a56m1v9sEiTIIUKVupcHOFQ==
+  dependencies:
+    "@types/node" "*"
+
+"@types/socket.io@^2.1.12":
+  version "2.1.12"
+  resolved "https://registry.yarnpkg.com/@types/socket.io/-/socket.io-2.1.12.tgz#91187f826a5dd2ed1113e935815bbaf9627e5cb0"
+  integrity sha512-oStc5VFkpb0AsjOxQUj9ztX5Iziatyla/rjZTYbFGoVrrKwd+JU2mtxk7iSl5RGYx9WunLo6UXW1fBzQok/ZyA==
+  dependencies:
+    "@types/engine.io" "*"
+    "@types/node" "*"
+    "@types/socket.io-parser" "*"
 
 "@types/source-list-map@*":
   version "0.1.2"
@@ -3420,6 +3459,11 @@ base64id@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/base64id/-/base64id-1.0.0.tgz#47688cb99bb6804f0e06d3e763b1c32e57d8e6b6"
   integrity sha1-R2iMuZu2gE8OBtPnY7HDLlfY5rY=
+
+base64id@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/base64id/-/base64id-2.0.0.tgz#2770ac6bc47d312af97a8bf9a634342e0cd25cb6"
+  integrity sha512-lGe34o6EHj9y3Kts9R4ZYs/Gr+6N7MCaMlIFA3F1R2O5/m7K06AxfSeO5530PEERE6/WyEg3lsuyw4GHlPZHog==
 
 base@^0.11.1:
   version "0.11.2"
@@ -4962,7 +5006,7 @@ debug@3.1.0, debug@=3.1.0, debug@~3.1.0:
   dependencies:
     ms "2.0.0"
 
-debug@4.1.1:
+debug@4.1.1, debug@~4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
   integrity sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
@@ -5450,6 +5494,18 @@ engine.io@~3.2.0:
     debug "~3.1.0"
     engine.io-parser "~2.1.0"
     ws "~3.3.1"
+
+engine.io@~3.4.0:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/engine.io/-/engine.io-3.4.2.tgz#8fc84ee00388e3e228645e0a7d3dfaeed5bd122c"
+  integrity sha512-b4Q85dFkGw+TqgytGPrGgACRUhsdKc9S9ErRAXpPGy/CXKs4tYoHDkvIRdsseAF7NjfVwjRFIn6KTnbw7LwJZg==
+  dependencies:
+    accepts "~1.3.4"
+    base64id "2.0.0"
+    cookie "0.3.1"
+    debug "~4.1.0"
+    engine.io-parser "~2.2.0"
+    ws "^7.1.2"
 
 enhanced-resolve@4.3.0, enhanced-resolve@^4.0.0, enhanced-resolve@^4.1.0, enhanced-resolve@^4.3.0:
   version "4.3.0"
@@ -11524,6 +11580,26 @@ socket.io-client@2.1.1:
     socket.io-parser "~3.2.0"
     to-array "0.1.4"
 
+socket.io-client@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/socket.io-client/-/socket.io-client-2.3.0.tgz#14d5ba2e00b9bcd145ae443ab96b3f86cbcc1bb4"
+  integrity sha512-cEQQf24gET3rfhxZ2jJ5xzAOo/xhZwK+mOqtGRg5IowZsMgwvHwnf/mCRapAAkadhM26y+iydgwsXGObBB5ZdA==
+  dependencies:
+    backo2 "1.0.2"
+    base64-arraybuffer "0.1.5"
+    component-bind "1.0.0"
+    component-emitter "1.2.1"
+    debug "~4.1.0"
+    engine.io-client "~3.4.0"
+    has-binary2 "~1.0.2"
+    has-cors "1.1.0"
+    indexof "0.0.1"
+    object-component "0.0.3"
+    parseqs "0.0.5"
+    parseuri "0.0.5"
+    socket.io-parser "~3.3.0"
+    to-array "0.1.4"
+
 socket.io-client@^2.0.4:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/socket.io-client/-/socket.io-client-2.3.1.tgz#91a4038ef4d03c19967bb3c646fec6e0eaa78cff"
@@ -11559,6 +11635,15 @@ socket.io-parser@~3.3.0:
     debug "~3.1.0"
     isarray "2.0.1"
 
+socket.io-parser@~3.4.0:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/socket.io-parser/-/socket.io-parser-3.4.1.tgz#b06af838302975837eab2dc980037da24054d64a"
+  integrity sha512-11hMgzL+WCLWf1uFtHSNvliI++tcRUWdoeYuwIl+Axvwy9z2gQM+7nJyN3STj1tLj5JyIUH8/gpDGxzAlDdi0A==
+  dependencies:
+    component-emitter "1.2.1"
+    debug "~4.1.0"
+    isarray "2.0.1"
+
 socket.io@2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/socket.io/-/socket.io-2.1.1.tgz#a069c5feabee3e6b214a75b40ce0652e1cfb9980"
@@ -11570,6 +11655,18 @@ socket.io@2.1.1:
     socket.io-adapter "~1.1.0"
     socket.io-client "2.1.1"
     socket.io-parser "~3.2.0"
+
+socket.io@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/socket.io/-/socket.io-2.3.0.tgz#cd762ed6a4faeca59bc1f3e243c0969311eb73fb"
+  integrity sha512-2A892lrj0GcgR/9Qk81EaY2gYhCBxurV0PfmmESO6p27QPrUK1J3zdns+5QPqvUYK2q657nSj0guoIil9+7eFg==
+  dependencies:
+    debug "~4.1.0"
+    engine.io "~3.4.0"
+    has-binary2 "~1.0.2"
+    socket.io-adapter "~1.1.0"
+    socket.io-client "2.3.0"
+    socket.io-parser "~3.4.0"
 
 sockjs-client@1.4.0:
   version "1.4.0"
@@ -13397,7 +13494,7 @@ ws@^6.2.1:
   dependencies:
     async-limiter "~1.0.0"
 
-ws@^7.2.3:
+ws@^7.1.2, ws@^7.2.3:
   version "7.4.1"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.1.tgz#a333be02696bd0e54cea0434e21dcc8a9ac294bb"
   integrity sha512-pTsP8UAfhy3sk1lSk/O/s4tjD0CRwvMnzvwr4OKGX7ZvqZtUyx4KIJB5JWbkykPoc55tixMGgTNoh3k4FkNGFQ==
