@@ -28,7 +28,7 @@
 		"help": "nx help",
 		"dev:ssr": "ng run test-websocket:serve-ssr",
 		"serve:ssr": "node dist/test-websocket/server/main.js",
-		"build:ssr": "NODE_ENV=production ng build --prod && ng run test-websocket:server:production",
+		"build:ssr": "NODE_ENV=production ng build --prod test-websocket && ng run test-websocket:server:production",
 		"prerender": "ng run test-websocket:prerender"
 	},
 	"private": true,
@@ -49,9 +49,11 @@
 		"@nestjs/websockets": "^7.6.4",
 		"@nguniversal/express-engine": "^11.0.1",
 		"@nrwl/angular": "11.0.18",
+		"@nrwl/nx-cloud": "^10.1.10",
 		"express": "^4.15.2",
 		"reflect-metadata": "^0.1.13",
 		"rxjs": "~6.5.5",
+		"socket.io-client": "^3.0.4",
 		"tslib": "^2.0.0",
 		"zone.js": "^0.10.2"
 	},
@@ -79,6 +81,7 @@
 		"@types/jest": "26.0.8",
 		"@types/node": "12.12.38",
 		"@types/socket.io": "^2.1.12",
+		"@types/socket.io-client": "^1.4.34",
 		"@typescript-eslint/eslint-plugin": "^4.11.0",
 		"@typescript-eslint/parser": "^4.11.0",
 		"codelyzer": "^6.0.0",

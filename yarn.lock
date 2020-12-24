@@ -227,6 +227,17 @@
     rxjs "6.6.2"
     source-map "0.7.3"
 
+"@angular-devkit/core@11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-11.0.0.tgz#bf69f1fb7a00d0496785f84122daae7dc27a4b14"
+  integrity sha512-fXZtSs3J4S12hboi3om1FA+QS0e8nuQMyzl2nkmtuhcELUFMmSrEl36dtCni5e7Svs46BUAZ5w8EazIkgGQDJg==
+  dependencies:
+    ajv "6.12.6"
+    fast-json-stable-stringify "2.1.0"
+    magic-string "0.25.7"
+    rxjs "6.6.3"
+    source-map "0.7.3"
+
 "@angular-devkit/core@11.0.1":
   version "11.0.1"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-11.0.1.tgz#7125b07ac7d66a8fdaaf612a3b757817d23b8107"
@@ -248,6 +259,15 @@
     magic-string "0.25.7"
     rxjs "6.6.3"
     source-map "0.7.3"
+
+"@angular-devkit/schematics@11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-11.0.0.tgz#ebdbd3b4cf9f740f793df3200cd28c00447abfc8"
+  integrity sha512-oCz9E0thA5WdGDuv6biu3X5kw5/vNE4ZZOKT2sHBQMpAuuDYrDpfTYQJjXQtjfXWvmlr8L8aqDD9N4HXsE4Esw==
+  dependencies:
+    "@angular-devkit/core" "11.0.0"
+    ora "5.1.0"
+    rxjs "6.6.3"
 
 "@angular-devkit/schematics@11.0.1":
   version "11.0.1"
@@ -2064,6 +2084,19 @@
     webpack-merge "4.2.1"
     webpack-node-externals "1.7.2"
 
+"@nrwl/nx-cloud@^10.1.10":
+  version "10.1.10"
+  resolved "https://registry.yarnpkg.com/@nrwl/nx-cloud/-/nx-cloud-10.1.10.tgz#4d59f421ba4a35bc7b87effeada60354461867c0"
+  integrity sha512-XoGu81iexHCqrd6xRt0M8jmuRk7bhIxfYAqqfTDHrTZ2YjuKeSuY1flkfRKZ+yT3vO8QcqgCV2iBWTo5Q0wXhA==
+  dependencies:
+    "@angular-devkit/schematics" "11.0.0"
+    axios "^0.19.0"
+    chalk "4.1.0"
+    node-machine-id "^1.1.12"
+    rxjs "6.5.5"
+    tar "5.0.5"
+    uuid "^3.3.3"
+
 "@nrwl/tao@11.0.18":
   version "11.0.18"
   resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-11.0.18.tgz#8f914345f25da9a53e447b9197e0c639455f32ec"
@@ -2207,6 +2240,11 @@
   dependencies:
     "@types/connect" "*"
     "@types/node" "*"
+
+"@types/component-emitter@^1.2.10":
+  version "1.2.10"
+  resolved "https://registry.yarnpkg.com/@types/component-emitter/-/component-emitter-1.2.10.tgz#ef5b1589b9f16544642e473db5ea5639107ef3ea"
+  integrity sha512-bsjleuRKWmGqajMerkzox19aGbscQX5rmmvvXl3wlIp5gMG1HgkiwPxsN5p070fBDKTNSPgojVbuY1+HWMbFhg==
 
 "@types/connect@*":
   version "3.4.34"
@@ -2383,6 +2421,11 @@
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
   integrity sha512-7EJYyKTL7tFR8+gDbB6Wwz/arpGa0Mywk1TJbNzKzHtzbwVmY4HR9WqS5VV7dsBUKQmPNr192jHr/VpBluj/hg==
+
+"@types/socket.io-client@^1.4.34":
+  version "1.4.34"
+  resolved "https://registry.yarnpkg.com/@types/socket.io-client/-/socket.io-client-1.4.34.tgz#8ca5f5732a9ad92b79aba71083cda5e5821e3ed9"
+  integrity sha512-Lzia5OTQFJZJ5R4HsEEldywiiqT9+W2rDbyHJiiTGqOcju89sCsQ8aUXDljY6Ls33wKZZGC0bfMhr/VpOyjtXg==
 
 "@types/socket.io-parser@*":
   version "2.2.1"
@@ -3311,7 +3354,7 @@ axios@0.19.0:
     follow-redirects "1.5.10"
     is-buffer "^2.0.2"
 
-axios@0.19.2:
+axios@0.19.2, axios@^0.19.0:
   version "0.19.2"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
   integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
@@ -4072,7 +4115,7 @@ chokidar@^2.1.8:
   optionalDependencies:
     fsevents "^1.2.7"
 
-chownr@^1.1.1, chownr@^1.1.2:
+chownr@^1.1.1, chownr@^1.1.2, chownr@^1.1.3:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.4.tgz#6fc9d7b42d32a583596337666e7d08084da2cc6b"
   integrity sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==
@@ -5461,6 +5504,22 @@ engine.io-client@~3.4.0:
     xmlhttprequest-ssl "~1.5.4"
     yeast "0.1.2"
 
+engine.io-client@~4.0.0:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/engine.io-client/-/engine.io-client-4.0.5.tgz#e12b05a11a7a3cccec6d69f9af8435146e3d507e"
+  integrity sha512-1lkn0QdekHQPMTcxUh8LqIuxQHNtKV5GvqkQzmZ1rYKAvB6puMm13U7K1ps3OQZ4joE46asQiAKrcdL9weNEVw==
+  dependencies:
+    base64-arraybuffer "0.1.4"
+    component-emitter "~1.3.0"
+    debug "~4.1.0"
+    engine.io-parser "~4.0.1"
+    has-cors "1.1.0"
+    parseqs "0.0.6"
+    parseuri "0.0.6"
+    ws "~7.2.1"
+    xmlhttprequest-ssl "~1.5.4"
+    yeast "0.1.2"
+
 engine.io-parser@~2.1.0, engine.io-parser@~2.1.1:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/engine.io-parser/-/engine.io-parser-2.1.3.tgz#757ab970fbf2dfb32c7b74b033216d5739ef79a6"
@@ -5482,6 +5541,13 @@ engine.io-parser@~2.2.0:
     base64-arraybuffer "0.1.4"
     blob "0.0.5"
     has-binary2 "~1.0.2"
+
+engine.io-parser@~4.0.1:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/engine.io-parser/-/engine.io-parser-4.0.2.tgz#e41d0b3fb66f7bf4a3671d2038a154024edb501e"
+  integrity sha512-sHfEQv6nmtJrq6TKuIz5kyEKH/qSdK56H/A+7DnAuUPWosnIZAS2NHNcPLmyjtY3cGS/MqJdZbUjW97JU72iYg==
+  dependencies:
+    base64-arraybuffer "0.1.4"
 
 engine.io@~3.2.0:
   version "3.2.1"
@@ -8817,7 +8883,7 @@ minizlib@^1.2.1:
   dependencies:
     minipass "^2.9.0"
 
-minizlib@^2.1.1:
+minizlib@^2.1.0, minizlib@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/minizlib/-/minizlib-2.1.2.tgz#e90d3466ba209b932451508a11ce3d3632145931"
   integrity sha512-bAxsR8BVfj60DWXHE3u30oHzfl4G7khkSuPW+qvpd7jFRHm7dLxOjUk1EHACJ/hxLY8phGJ0YhYHZo7jil7Qdg==
@@ -9061,6 +9127,11 @@ node-libs-browser@^2.2.1:
     url "^0.11.0"
     util "^0.11.0"
     vm-browserify "^1.0.1"
+
+node-machine-id@^1.1.12:
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/node-machine-id/-/node-machine-id-1.1.12.tgz#37904eee1e59b320bb9c5d6c0a59f3b469cb6267"
+  integrity sha512-QNABxbrPa3qEIfrE6GOJ7BYIuignnJw7iQ2YPbc3Nla1HzRJjXzZOiikfF8m7eAMfichLt3M4VgLOetqgDmgGQ==
 
 node-modules-regexp@^1.0.0:
   version "1.0.0"
@@ -11111,6 +11182,13 @@ rx@4.1.0:
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
   integrity sha1-pfE/957zt0D+MKqAP7CfmIBdR4I=
 
+rxjs@6.5.5, rxjs@~6.5.5:
+  version "6.5.5"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.5.tgz#c5c884e3094c8cfee31bf27eb87e54ccfc87f9ec"
+  integrity sha512-WfQI+1gohdf0Dai/Bbmk5L5ItH5tYqm3ki2c5GdWhKjalzjg93N3avFjVStyZZz+A2Em+ZxKH5bNghw9UeylGQ==
+  dependencies:
+    tslib "^1.9.0"
+
 rxjs@6.6.2:
   version "6.6.2"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.2.tgz#8096a7ac03f2cc4fe5860ef6e572810d9e01c0d2"
@@ -11131,13 +11209,6 @@ rxjs@^5.5.6:
   integrity sha512-xx2itnL5sBbqeeiVgNPVuQQ1nC8Jp2WfNJhXWHmElW9YmrpS9UVnNzhP3EH3HFqexO5Tlp8GhYY+WEcqcVMvGw==
   dependencies:
     symbol-observable "1.0.1"
-
-rxjs@~6.5.5:
-  version "6.5.5"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.5.tgz#c5c884e3094c8cfee31bf27eb87e54ccfc87f9ec"
-  integrity sha512-WfQI+1gohdf0Dai/Bbmk5L5ItH5tYqm3ki2c5GdWhKjalzjg93N3avFjVStyZZz+A2Em+ZxKH5bNghw9UeylGQ==
-  dependencies:
-    tslib "^1.9.0"
 
 safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
@@ -11617,6 +11688,20 @@ socket.io-client@^2.0.4:
     socket.io-parser "~3.3.0"
     to-array "0.1.4"
 
+socket.io-client@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/socket.io-client/-/socket.io-client-3.0.4.tgz#c0203419a9f71e1360ef92a31301e80260e94bb9"
+  integrity sha512-qMvBuS+W9JIN2mkfAWDCxuIt+jpIKDf8C0604zEqx1JrPaPSS6cN0F3B2GYWC83TqBeVJXW66GFxWV3KD88n0Q==
+  dependencies:
+    "@types/component-emitter" "^1.2.10"
+    backo2 "1.0.2"
+    component-bind "1.0.0"
+    component-emitter "~1.3.0"
+    debug "~4.1.0"
+    engine.io-client "~4.0.0"
+    parseuri "0.0.6"
+    socket.io-parser "~4.0.1"
+
 socket.io-parser@~3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/socket.io-parser/-/socket.io-parser-3.2.0.tgz#e7c6228b6aa1f814e6148aea325b51aa9499e077"
@@ -11643,6 +11728,15 @@ socket.io-parser@~3.4.0:
     component-emitter "1.2.1"
     debug "~4.1.0"
     isarray "2.0.1"
+
+socket.io-parser@~4.0.1:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/socket.io-parser/-/socket.io-parser-4.0.2.tgz#3d021a9c86671bb079e7c6c806db6a1d9b1bc780"
+  integrity sha512-Bs3IYHDivwf+bAAuW/8xwJgIiBNtlvnjYRc4PbXgniLmcP1BrakBoq/QhO24rgtgW7VZ7uAaswRGxutUnlAK7g==
+  dependencies:
+    "@types/component-emitter" "^1.2.10"
+    component-emitter "~1.3.0"
+    debug "~4.1.0"
 
 socket.io@2.1.1:
   version "2.1.1"
@@ -12306,6 +12400,18 @@ tapable@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-2.2.0.tgz#5c373d281d9c672848213d0e037d1c4165ab426b"
   integrity sha512-FBk4IesMV1rBxX2tfiK8RAmogtWn53puLOQlvO8XuwlgxcYbP4mVPS9Ph4aeamSyyVjOl24aYWAuc8U5kCVwMw==
+
+tar@5.0.5:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/tar/-/tar-5.0.5.tgz#03fcdb7105bc8ea3ce6c86642b9c942495b04f93"
+  integrity sha512-MNIgJddrV2TkuwChwcSNds/5E9VijOiw7kAc1y5hTNJoLDSuIyid2QtLYiCYNnICebpuvjhPQZsXwUL0O3l7OQ==
+  dependencies:
+    chownr "^1.1.3"
+    fs-minipass "^2.0.0"
+    minipass "^3.0.0"
+    minizlib "^2.1.0"
+    mkdirp "^0.5.0"
+    yallist "^4.0.0"
 
 tar@^4.4.10:
   version "4.4.13"
@@ -12999,7 +13105,7 @@ uuid@8.3.2, uuid@^8.3.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
-uuid@^3.0.0, uuid@^3.3.2, uuid@^3.4.0:
+uuid@^3.0.0, uuid@^3.3.2, uuid@^3.3.3, uuid@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
@@ -13514,6 +13620,11 @@ ws@~6.1.0:
   integrity sha512-eqZfL+NE/YQc1/ZynhojeV8q+H050oR8AZ2uIev7RU10svA9ZnJUddHcOUZTJLinZ9yEfdA2kSATS2qZK5fhJA==
   dependencies:
     async-limiter "~1.0.0"
+
+ws@~7.2.1:
+  version "7.2.5"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.2.5.tgz#abb1370d4626a5a9cd79d8de404aa18b3465d10d"
+  integrity sha512-C34cIU4+DB2vMyAbmEKossWq2ZQDr6QEyuuCzWrM9zfw1sGc0mYiJ0UnG9zzNykt49C2Fi34hvr2vssFQRS6EA==
 
 xhr2@^0.2.0:
   version "0.2.0"
