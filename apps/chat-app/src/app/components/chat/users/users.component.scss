@@ -1,0 +1,43 @@
+%global-padding {
+	@apply p-2;
+}
+
+.users-list-title {
+	@extend %global-padding;
+	@apply select-none font-bold;
+}
+
+.users-list {
+	&__user-profile {
+		@extend %global-padding;
+		@apply cursor-pointer;
+
+		&:hover {
+			@apply bg-discord-light rounded;
+		}
+	}
+}
+
+.user-profile {
+	@apply select-none;
+
+	&__common {
+		@apply overflow-hidden;
+	}
+
+	&__icon {
+		@apply w-9 rounded-full;
+	}
+
+	&__name {
+		@apply overflow-ellipsis;
+	}
+}
+
+.opacity-transition {
+	@apply opacity-80 transition-opacity;
+
+	&:hover {
+		@apply opacity-100;
+	}
+}
