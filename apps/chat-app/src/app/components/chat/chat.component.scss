@@ -1,0 +1,13 @@
+.wrapper {
+	@apply h-screen bg-discord-light text-discord-lightest;
+	min-width: 600px;
+	min-height: 600px;
+
+	&__section {
+		@apply p-5;
+
+		&--dark {
+			@apply bg-discord-dark;
+		}
+	}
+}
