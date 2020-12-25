@@ -14,7 +14,8 @@ const extraOptions: ExtraOptions = {
 	//enableTracing: true,
 	preloadingStrategy: QuicklinkStrategy,
 	scrollPositionRestoration: 'enabled',
-	anchorScrolling: 'enabled'
+	anchorScrolling: 'enabled',
+	useHash: true
 };
 
 @NgModule({
