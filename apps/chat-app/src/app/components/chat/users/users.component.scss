@@ -2,12 +2,12 @@
 	@apply p-2;
 }
 
-.users-list-title {
+.user-list-title {
 	@extend %global-padding;
 	@apply select-none font-bold;
 }
 
-.users-list {
+.user-list {
 	&__user-profile {
 		@extend %global-padding;
 		@apply cursor-pointer;
@@ -21,15 +21,17 @@
 .user-profile {
 	@apply select-none;
 
-	&__common {
+	%common {
 		@apply overflow-hidden;
 	}
 
 	&__icon {
+		@extend %common;
 		@apply w-9 rounded-full;
 	}
 
 	&__name {
+		@extend %common;
 		@apply overflow-ellipsis;
 	}
 }
