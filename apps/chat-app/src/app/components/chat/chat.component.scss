@@ -11,3 +11,21 @@
 		}
 	}
 }
+
+.chat {
+	&__log {
+	}
+
+	&__input {
+	}
+}
+
+.input-container {
+	&__input {
+		@apply w-full bg-discord-thin-light rounded-md h-10 p-6 focus:outline-none;
+
+		&::placeholder {
+			@apply opacity-50;
+		}
+	}
+}

@@ -3,9 +3,18 @@
 		<toybox-users></toybox-users>
 	</nav>
 
-	<main class="wrapper__section" fxFlex>
-		<toybox-status></toybox-status>
+	<main class="wrapper__section" fxFlex fxLayout="column">
+		<div fxFlex="50px">
+			<toybox-status></toybox-status>
+		</div>
 
-		<p>chat works!</p>
+		<div class="chat" fxFlex fxLayout="column">
+			<div class="chat__log" fxFlex></div>
+			<div class="chat__input">
+				<div class="input-container">
+					<input class="input-container__input" placeholder="Press enter to send a message" />
+				</div>
+			</div>
+		</div>
 	</main>
 </div>
