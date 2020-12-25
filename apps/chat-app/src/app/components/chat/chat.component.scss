@@ -1,7 +1,5 @@
 .wrapper {
 	@apply h-screen bg-discord-light text-discord-lightest;
-	min-width: 600px;
-	min-height: 600px;
 
 	&__section {
 		@apply p-5;
@@ -14,6 +12,17 @@
 
 .chat {
 	&__log {
+		@apply overflow-auto;
+
+		&::-webkit-scrollbar,
+		&::-webkit-scrollbar-track {
+			@apply bg-discord-thin-dark rounded w-2;
+		}
+
+		// Scrollbar itself
+		&::-webkit-scrollbar-thumb {
+			@apply bg-discord-darkest rounded w-2;
+		}
 	}
 
 	&__input {
@@ -26,6 +35,44 @@
 
 		&::placeholder {
 			@apply opacity-50;
+		}
+	}
+}
+
+.log-list {
+	&__item {
+		@apply my-6;
+
+		&::hover {
+			@apply bg-discord-dark;
+		}
+	}
+}
+
+.log-item {
+	@apply cursor-default;
+
+	&__icon {
+		@apply w-10 rounded-full overflow-hidden cursor-pointer;
+	}
+
+	&__content {
+		&__name {
+			@apply text-white cursor-pointer;
+
+			&:hover {
+				@apply underline;
+			}
+		}
+
+		&__post {
+			a {
+				@apply text-blue-400  cursor-pointer;
+
+				&:hover {
+					@apply underline;
+				}
+			}
 		}
 	}
 }

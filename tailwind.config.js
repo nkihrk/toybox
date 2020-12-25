@@ -8,6 +8,7 @@ module.exports = {
 				'discord-thin-light': '#40444B',
 				'discord-light': '#36393F',
 				'discord-lightest': '#D4D5D6',
+				'discord-thin-dark': '#2E3338',
 				'discord-dark': '#2F3136',
 				'discord-darkest': '#202225'
 			}
