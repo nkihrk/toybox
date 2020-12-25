@@ -219,7 +219,7 @@
 			"prefix": "toybox",
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:browser",
+					"builder": "@angular-builders/custom-webpack:browser",
 					"options": {
 						"outputPath": "dist/apps/chat-app",
 						"index": "apps/chat-app/src/index.html",
@@ -229,7 +229,10 @@
 						"aot": true,
 						"assets": ["apps/chat-app/src/favicon.ico", "apps/chat-app/src/assets"],
 						"styles": ["apps/chat-app/src/styles.scss"],
-						"scripts": []
+						"scripts": [],
+						"customWebpackConfig": {
+							"path": "webpack.config.js"
+						}
 					},
 					"configurations": {
 						"production": {
@@ -262,10 +265,13 @@
 					}
 				},
 				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
+					"builder": "@angular-builders/custom-webpack:dev-server",
 					"options": {
 						"browserTarget": "chat-app:build",
-						"proxyConfig": "apps/chat-app/proxy.conf.json"
+						"proxyConfig": "apps/chat-app/proxy.conf.json",
+						"customWebpackConfig": {
+							"path": "webpack.config.js"
+						}
 					},
 					"configurations": {
 						"production": {
