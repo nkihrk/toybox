@@ -31,21 +31,13 @@
 
 .input-container {
 	&__input {
-		@apply w-full bg-discord-thin-light rounded-md h-10 p-6 focus:outline-none;
-
-		&::placeholder {
-			@apply opacity-50;
-		}
+		@apply w-full bg-discord-thin-light rounded-md h-10 p-6 focus:outline-none placeholder-opacity-50;
 	}
 }
 
 .log-list {
 	&__item {
-		@apply my-6;
-
-		&::hover {
-			@apply bg-discord-dark;
-		}
+		@apply my-6 hover:bg-discord-dark hover:bg-opacity-50;
 	}
 }
 
@@ -58,20 +50,12 @@
 
 	&__content {
 		&__name {
-			@apply text-white cursor-pointer;
-
-			&:hover {
-				@apply underline;
-			}
+			@apply text-white cursor-pointer hover:underline;
 		}
 
 		&__post {
 			a {
-				@apply text-blue-400  cursor-pointer;
-
-				&:hover {
-					@apply underline;
-				}
+				@apply text-blue-400  cursor-pointer hover:underline;
 			}
 		}
 	}
