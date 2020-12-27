@@ -2,9 +2,26 @@
 	@apply p-2;
 }
 
-.user-list-title {
+.app-title {
 	@extend %global-padding;
-	@apply select-none font-bold;
+	@apply border-b border-discord-darkest hover:bg-discord-light cursor-pointer;
+
+	&__content {
+		@extend %global-padding;
+		@apply font-bold select-none;
+	}
+}
+
+.users {
+	@extend %global-padding;
+
+	&__title {
+		@extend %global-padding;
+		@apply select-none font-bold opacity-70 pb-0;
+	}
+
+	&__list {
+	}
 }
 
 .user-list {
@@ -19,20 +36,18 @@
 }
 
 .user-profile {
-	@apply select-none;
-
 	%common {
-		@apply overflow-hidden;
+		@apply overflow-hidden select-none;
 	}
 
 	&__icon {
 		@extend %common;
-		@apply w-9 rounded-full;
+		@apply w-8 rounded-full;
 	}
 
 	&__name {
 		@extend %common;
-		@apply overflow-ellipsis;
+		@apply overflow-ellipsis opacity-80;
 	}
 }
 

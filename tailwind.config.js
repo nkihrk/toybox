@@ -12,7 +12,10 @@ module.exports = {
 				'discord-dark': '#2F3136',
 				'discord-darkest': '#202225'
 			}
-		}
+		},
+		borderColor: (theme) => ({
+			...theme('colors')
+		})
 	},
 	variants: {
 		extend: {}
