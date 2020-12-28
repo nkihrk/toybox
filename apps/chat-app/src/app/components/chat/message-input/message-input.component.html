@@ -1,0 +1,8 @@
+<div class="input-container">
+	<input
+		class="input-container__input"
+		placeholder="Press enter to send a message"
+		[formControl]="messageForm"
+		(keyup)="onEnter($event)"
+	/>
+</div>
