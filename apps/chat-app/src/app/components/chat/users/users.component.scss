@@ -50,11 +50,3 @@
 		@apply overflow-ellipsis opacity-80;
 	}
 }
-
-.opacity-transition {
-	@apply opacity-80 transition-opacity;
-
-	&:hover {
-		@apply opacity-100;
-	}
-}
