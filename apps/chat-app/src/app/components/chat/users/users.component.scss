@@ -28,11 +28,8 @@
 .user-list {
 	&__user-profile {
 		@extend %global-padding;
-		@apply cursor-pointer;
-
-		&:hover {
-			@apply bg-discord-light rounded;
-		}
+		@apply cursor-pointer rounded;
+		@apply hover:bg-discord-light;
 	}
 }
 
