@@ -1,8 +1,11 @@
 <div class="input-container">
-	<input
+	<textarea
 		class="input-container__input"
 		placeholder="Press enter to send a message"
+		type="text"
+		#messageInput
 		[formControl]="messageForm"
-		(keyup)="onEnter($event)"
-	/>
+		(keyup)="onKeyUp($event)"
+		(keydown)="onKeyDown($event)"
+	></textarea>
 </div>
