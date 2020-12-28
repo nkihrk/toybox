@@ -15,20 +15,20 @@
 		&::-webkit-scrollbar,
 		&::-webkit-scrollbar-track,
 		&::-webkit-scrollbar-thumb {
-			@apply rounded w-2;
+			@apply rounded-lg w-2;
 		}
 
-		&::-webkit-scrollbar,
-		&::-webkit-scrollbar-track {
+		&::-webkit-scrollbar {
 			@apply bg-discord-thin-dark;
+		}
+
+		&::-webkit-scrollbar-track {
+			@apply bg-transparent;
 		}
 
 		&::-webkit-scrollbar-thumb {
 			@apply bg-discord-darkest;
 		}
-	}
-
-	&__input {
 	}
 }
 

@@ -4,9 +4,7 @@
 	</nav>
 
 	<main class="wrapper__section" fxFlex fxLayout="column">
-		<div fxFlex="50px">
-			<toybox-status></toybox-status>
-		</div>
+		<toybox-status></toybox-status>
 
 		<div class="chat" fxFlex fxLayout="column">
 			<div class="chat__log" fxFlex>
@@ -167,15 +165,13 @@
 					</li>
 				</ul>
 			</div>
-			<div class="chat__input">
-				<div class="input-container">
-					<input
-						class="input-container__input"
-						placeholder="Press enter to send a message"
-						[formControl]="messageForm"
-						(keyup)="onEnter($event)"
-					/>
-				</div>
+			<div class="input-container">
+				<input
+					class="input-container__input"
+					placeholder="Press enter to send a message"
+					[formControl]="messageForm"
+					(keyup)="onEnter($event)"
+				/>
 			</div>
 		</div>
 	</main>
