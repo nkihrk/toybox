@@ -43,7 +43,7 @@ export class MessageInputComponent implements OnInit {
 			if (message === '') return;
 
 			const post: LogItem = {
-				name: 'hogehoge',
+				name: 'NkiHrk',
 				post: message,
 				createdAt: new Date()
 			};
