@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { WebsocketService } from '../services/websocket.service';
+import { LogItem } from '../interfaces/log-item.model';
 
 @Component({
 	selector: 'toybox-message-input',
@@ -12,10 +14,20 @@ export class MessageInputComponent implements OnInit {
 	messageForm = new FormControl();
 	isShiftKey = false;
 
-	constructor() {}
+	constructor(private websocketService: WebsocketService) {}
 
 	ngOnInit(): void {
 		this._autoGrowTextZone(this.messageInputRef.nativeElement);
+
+		// initialize the form's value
+		this.messageForm.setValue('');
+	}
+
+	onKeyDown($event: any): void {
+		if ($event.keyCode === 13) {
+		} else if ($event.keyCode == 16) {
+			this.isShiftKey = true;
+		}
 	}
 
 	onKeyUp($event: any): void {
@@ -26,7 +38,18 @@ export class MessageInputComponent implements OnInit {
 
 		if (this.isShiftKey) {
 		} else {
-			const message: string = this.messageForm.value;
+			const message: string = this.messageForm.value.trim();
+
+			if (message === '') return;
+
+			const post: LogItem = {
+				name: 'hogehoge',
+				post: message,
+				createdAt: new Date()
+			};
+
+			// send a message to the server
+			this.websocketService.emit('broadcast', post);
 
 			// Clean up the messageForm
 			this._resetMessageForm();
@@ -41,12 +64,5 @@ export class MessageInputComponent implements OnInit {
 
 	private _resetMessageForm(): void {
 		this.messageForm.reset();
-	}
-
-	onKeyDown($event: any): void {
-		if ($event.keyCode === 13) {
-		} else if ($event.keyCode == 16) {
-			this.isShiftKey = true;
-		}
 	}
 }

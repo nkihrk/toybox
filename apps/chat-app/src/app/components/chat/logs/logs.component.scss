@@ -14,17 +14,23 @@
 
 	&__content {
 		@apply px-4;
+	}
+}
 
-		&__name {
-			@apply text-white cursor-pointer;
-			@apply hover:underline;
-		}
+.content-description {
+	&__name {
+		@apply text-white cursor-pointer;
+		@apply hover:underline;
+	}
 
-		&__post {
-			a {
-				@apply text-blue-400  cursor-pointer;
-				@apply hover:underline;
-			}
-		}
+	&__time {
+		@apply opacity-50 text-xs;
+	}
+}
+
+.content-post {
+	a {
+		@apply text-blue-400  cursor-pointer;
+		@apply hover:underline;
 	}
 }
