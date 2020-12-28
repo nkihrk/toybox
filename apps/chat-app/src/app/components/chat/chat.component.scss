@@ -2,8 +2,6 @@
 	@apply h-screen bg-discord-light text-discord-lightest;
 
 	&__section {
-		//@apply p-5;
-
 		&--dark {
 			@apply bg-discord-dark;
 		}
@@ -15,13 +13,18 @@
 		@apply overflow-y-scroll mr-1 pr-1;
 
 		&::-webkit-scrollbar,
-		&::-webkit-scrollbar-track {
-			@apply bg-discord-thin-dark rounded w-2;
+		&::-webkit-scrollbar-track,
+		&::-webkit-scrollbar-thumb {
+			@apply rounded w-2;
 		}
 
-		// Scrollbar itself
+		&::-webkit-scrollbar,
+		&::-webkit-scrollbar-track {
+			@apply bg-discord-thin-dark;
+		}
+
 		&::-webkit-scrollbar-thumb {
-			@apply bg-discord-darkest rounded w-2;
+			@apply bg-discord-darkest;
 		}
 	}
 
@@ -33,13 +36,15 @@
 	@apply px-5 pb-6;
 
 	&__input {
-		@apply w-full bg-discord-thin-light rounded-md h-10 p-6 focus:outline-none placeholder-opacity-50;
+		@apply w-full bg-discord-thin-light rounded-md h-10 p-6 placeholder-opacity-50;
+		@apply focus:outline-none;
 	}
 }
 
 .log-list {
 	&__item {
-		@apply my-6 py-1 pl-5 hover:bg-discord-dark hover:bg-opacity-50;
+		@apply my-6 py-1 pl-5;
+		@apply hover:bg-discord-dark hover:bg-opacity-50;
 	}
 }
 
@@ -52,12 +57,14 @@
 
 	&__content {
 		&__name {
-			@apply text-white cursor-pointer hover:underline;
+			@apply text-white cursor-pointer;
+			@apply hover:underline;
 		}
 
 		&__post {
 			a {
-				@apply text-blue-400  cursor-pointer hover:underline;
+				@apply text-blue-400  cursor-pointer;
+				@apply hover:underline;
 			}
 		}
 	}

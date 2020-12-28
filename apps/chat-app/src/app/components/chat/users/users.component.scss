@@ -4,7 +4,8 @@
 
 .app-title {
 	@extend %global-padding;
-	@apply border-b border-discord-darkest hover:bg-discord-light cursor-pointer;
+	@apply border-b border-discord-darkest cursor-pointer;
+	@apply hover:bg-discord-light;
 
 	&__content {
 		@extend %global-padding;
