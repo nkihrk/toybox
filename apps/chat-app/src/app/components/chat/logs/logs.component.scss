@@ -1,0 +1,30 @@
+.log-list {
+	&__item {
+		@apply my-6 py-1 pl-5;
+		@apply hover:bg-discord-dark hover:bg-opacity-50;
+	}
+}
+
+.log-item {
+	@apply cursor-default;
+
+	&__icon {
+		@apply w-10 rounded-full overflow-hidden cursor-pointer select-none;
+	}
+
+	&__content {
+		@apply px-4;
+
+		&__name {
+			@apply text-white cursor-pointer;
+			@apply hover:underline;
+		}
+
+		&__post {
+			a {
+				@apply text-blue-400  cursor-pointer;
+				@apply hover:underline;
+			}
+		}
+	}
+}

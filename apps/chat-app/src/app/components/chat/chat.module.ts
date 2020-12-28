@@ -17,9 +17,11 @@ import { StatusFacade } from './+state/status/status.facade';
 import * as fromUsers from './+state/users/users.reducer';
 import { UsersEffects } from './+state/users/users.effects';
 import { UsersFacade } from './+state/users/users.facade';
+import { LogsComponent } from './logs/logs.component';
+import { MessageInputComponent } from './message-input/message-input.component';
 
 @NgModule({
-	declarations: [ChatComponent, StatusComponent, UsersComponent],
+	declarations: [ChatComponent, StatusComponent, UsersComponent, LogsComponent, MessageInputComponent],
 	imports: [
 		CommonModule,
 		SharedModule,
