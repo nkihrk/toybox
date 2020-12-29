@@ -5,8 +5,9 @@ import { ViewportScroller } from '@angular/common';
 import { filter } from 'rxjs/operators';
 
 const routes: Routes = [
-	{ path: '', loadChildren: () => import('./components/chat/chat.module').then((m) => m.ChatModule) },
-	{ path: '**', redirectTo: '/' }
+	{ path: 'room', loadChildren: () => import('./components/chat/chat.module').then((m) => m.ChatModule) },
+	{ path: '', redirectTo: '/room', pathMatch: 'full' },
+	{ path: '**', redirectTo: '/room' }
 ];
 
 const extraOptions: ExtraOptions = {
