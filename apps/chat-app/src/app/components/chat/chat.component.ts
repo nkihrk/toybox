@@ -20,38 +20,36 @@ export class ChatComponent implements OnInit, OnDestroy {
 	constructor(private route: ActivatedRoute, private router: Router, private websocketService: WebsocketService) {}
 
 	ngOnInit(): void {
-		this._checkQueryPamaras();
+		this._checkQueryParams();
 	}
 
 	ngOnDestroy(): void {
 		this.subscriptions.forEach(($subscription) => $subscription.unsubscribe());
 	}
 
-	private _checkQueryPamaras(): void {
+	private _checkQueryParams(): void {
 		this.subscriptions.push(
 			this.route.queryParamMap.subscribe(
 				($params: ParamMap) => {
-					const roomId = $params.get('id');
+					const roomId: string = $params.get('id');
+					const roomName: string = $params.get('name') || 'ChatApp room';
 
-					if (uuidValidate(roomId)) this._connectToWebsocket(roomId);
+					if (uuidValidate(roomId)) this._connectToWebsocket(roomId, roomName);
 				},
 				($error: any) => {
 					console.log($error);
-				},
-				() => {
-					console.log('done successfully');
 				}
 			)
 		);
 	}
 
-	private _connectToWebsocket($roomId: string): void {
+	private _connectToWebsocket($roomId: string, $roomName: string): void {
 		this.websocketService.connect();
 
 		this.subscriptions.push(
-			this.websocketService.on('broadcast').subscribe((data) => {
-				console.log(data);
-				this.logItems.push(data);
+			this.websocketService.on('broadcast').subscribe(($data: LogItem) => {
+				console.log($data);
+				this.logItems.push($data);
 
 				setTimeout(() => {
 					this.chatLogRef.nativeElement.scrollTop = this.chatLogRef.nativeElement.scrollHeight;

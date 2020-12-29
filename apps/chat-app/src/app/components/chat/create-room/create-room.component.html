@@ -1,6 +1,6 @@
 <div class="create-room" *ngIf="isCreateRoom">
 	<div class="create-room_title">Create a Room</div>
-	<div class="create-room_room-name">
+	<div class="create-room_form">
 		<form #formCheck="ngForm" [formGroup]="createRoomForm">
 			<label for="room-name">Room name</label>
 			<ng-container *ngIf="isShowErrors">
