@@ -19,9 +19,10 @@ import { UsersEffects } from './+state/users/users.effects';
 import { UsersFacade } from './+state/users/users.facade';
 import { LogsComponent } from './logs/logs.component';
 import { MessageInputComponent } from './message-input/message-input.component';
+import { CreateRoomComponent } from './create-room/create-room.component';
 
 @NgModule({
-	declarations: [ChatComponent, StatusComponent, UsersComponent, LogsComponent, MessageInputComponent],
+	declarations: [ChatComponent, StatusComponent, UsersComponent, LogsComponent, MessageInputComponent, CreateRoomComponent],
 	imports: [
 		CommonModule,
 		SharedModule,

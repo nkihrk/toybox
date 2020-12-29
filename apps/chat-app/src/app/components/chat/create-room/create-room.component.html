@@ -1,0 +1,10 @@
+<div class="create-room" *ngIf="isCreateRoom">
+	<div class="create-room_title">Create a Room</div>
+	<div class="create-room_room-name">
+		<form #formCheck="ngForm" [formGroup]="createRoomForm">
+			<label for="room-name">Room name</label>
+			<input type="text" name="room-name" id="room-name" [formControl]="createRoomForm.controls['room-name']" />
+			<input type="button" value="create" />
+		</form>
+	</div>
+</div>
