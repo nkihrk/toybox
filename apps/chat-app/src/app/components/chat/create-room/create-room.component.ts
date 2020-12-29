@@ -83,7 +83,7 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
 					}
 				},
 				($error: any) => {
-					console.log($error);
+					this.isCreateRoom = true;
 				}
 			)
 		);
