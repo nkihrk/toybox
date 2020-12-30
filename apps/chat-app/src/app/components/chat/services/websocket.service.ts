@@ -16,14 +16,14 @@ export class WebsocketService {
 		this.socket = io(this.url);
 	}
 
-	emit(emitName: string, data: LogItem): void {
-		this.socket.emit(emitName, data);
+	emit($emitName: string, $data: LogItem): void {
+		this.socket.emit($emitName, $data);
 	}
 
-	on(onName: string): Observable<any> {
+	on($onName: string): Observable<any> {
 		const observable = new Observable((observer) => {
-			this.socket.on(onName, (data) => {
-				observer.next(data);
+			this.socket.on($onName, ($data: any) => {
+				observer.next($data);
 			});
 
 			return () => {

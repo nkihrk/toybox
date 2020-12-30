@@ -7,7 +7,7 @@
 				<div [hidden]="!roomNameControl.errors?.required">The name is required</div>
 			</ng-container>
 			<input type="text" name="room-name" id="room-name" [formControl]="createRoomForm.controls['roomName']" />
-			<input type="button" value="create" (click)="createRoom()" [disabled]="!isButtonEnabled" />
+			<button (click)="createRoom()" [disabled]="!isButtonEnabled">create</button>
 		</form>
 	</div>
 </div>
