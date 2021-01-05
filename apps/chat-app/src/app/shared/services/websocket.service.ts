@@ -7,9 +7,13 @@ import { Observable } from 'rxjs';
 })
 export class WebsocketService {
 	private url = 'http://localhost:3333';
-	private socket = io(this.url);
+	private socket;
 
 	constructor() {}
+
+	connect(): void {
+		this.socket = io(this.url);
+	}
 
 	emit($emitName: string, $payload: any): void {
 		this.socket.emit($emitName, $payload);

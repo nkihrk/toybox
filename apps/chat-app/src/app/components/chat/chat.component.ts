@@ -42,8 +42,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 					if (uuidValidate(roomId)) {
 						this.roomId = roomId;
 
-						this._joinRoom(joinRoom);
-						this._connectToWebsocket(roomId, roomName);
+						this._connectToWebsocket(roomId, roomName, joinRoom);
 					}
 				},
 				($error: any) => {
@@ -53,23 +52,23 @@ export class ChatComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	private _joinRoom($joinRoom: JoinRoom): void {
-		this.websocketService.emit('joinRoom', $joinRoom);
-	}
+	private _connectToWebsocket($roomId: string, $roomName: string, $joinRoom: JoinRoom): void {
+		// connect to a websocket server
+		this.websocketService.connect();
 
-	private _getUsers(): void {
+		// join a user to the specific room
+		this._joinRoom($joinRoom);
+
 		// get all users in the current room
-		this.websocketService.emit('getUsers', '');
-	}
-
-	private _connectToWebsocket($roomId: string, $roomName: string): void {
 		this._getUsers();
 
+		// broadcast listeners
 		this.subscriptions.push(
 			this.websocketService.on('messageToClient').subscribe(($data: LogItemServer) => {
 				console.log($data);
 				this.logItems.push($data);
 
+				// scroll to the bottom automatically after getting a message from some users
 				setTimeout(() => {
 					this.chatLogRef.nativeElement.scrollTop = this.chatLogRef.nativeElement.scrollHeight;
 				}, 1);
@@ -87,5 +86,13 @@ export class ChatComponent implements OnInit, OnDestroy {
 				delete this.users[$data];
 			})
 		);
+	}
+
+	private _joinRoom($joinRoom: JoinRoom): void {
+		this.websocketService.emit('joinRoom', $joinRoom);
+	}
+
+	private _getUsers(): void {
+		this.websocketService.emit('getUsers', '');
 	}
 }
