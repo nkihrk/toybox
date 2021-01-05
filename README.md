@@ -1,7 +1,7 @@
 # <p align="middle">ToyBox</p>
 
 <p align="middle">
-ToyBox is my experimental repos.
+ToyBox is just an experimental monorepo.
 </p>
 
 ## ChatApp
