@@ -12,15 +12,16 @@ ChatApp is a Discord-like small chat app.
 
 Used: Angular, NestJS, socket.io, tailwindcss
 
+```
+> nx run chat-app:serve // frontend
+> nx run chat-app-server:serve // backend
+```
+
 <br>
 
 ![chat-app](./readme_assets/chat-app_1.png)
 ![chat-app](./readme_assets/chat-app_2.png)
 
-```
-> nx run chat-app:serve // frontend
-> nx run chat-app-server:serve // backend
-```
 
 # License
 
