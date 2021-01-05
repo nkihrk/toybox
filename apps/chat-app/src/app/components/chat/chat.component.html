@@ -1,6 +1,6 @@
 <div class="wrapper" fxLayout="row">
 	<nav class="wrapper__section wrapper__section--dark" fxFlex="250px">
-		<toybox-users></toybox-users>
+		<toybox-users [users]="users"></toybox-users>
 	</nav>
 
 	<main class="wrapper__section" fxFlex fxLayout="column">
@@ -11,7 +11,7 @@
 				<toybox-logs [logItems]="logItems"></toybox-logs>
 			</div>
 
-			<toybox-message-input></toybox-message-input>
+			<toybox-message-input [roomId]="roomId"></toybox-message-input>
 		</div>
 	</main>
 </div>

@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { WebsocketService } from '../services/websocket.service';
-import { LogItem } from '../interfaces/log-item.model';
+import { LogItemClient } from '../interfaces/log-item.model';
 
 @Component({
 	selector: 'toybox-message-input',
@@ -10,6 +10,8 @@ import { LogItem } from '../interfaces/log-item.model';
 })
 export class MessageInputComponent implements OnInit {
 	@ViewChild('messageInput', { static: true }) messageInputRef: ElementRef<HTMLTextAreaElement>;
+
+	@Input() roomId: string;
 
 	messageForm = new FormControl();
 	isShiftKey = false;
@@ -42,18 +44,14 @@ export class MessageInputComponent implements OnInit {
 
 			if (message === '') return;
 
-			const post: LogItem = {
-				name: 'NkiHrk',
-				post: message,
-				createdAt: new Date()
-			};
+			const logItem: LogItemClient = { message };
 
 			// send a message to the server
-			this.websocketService.emit('broadcast', post);
+			this.websocketService.emit('messageToServer', logItem);
 
 			// Clean up the messageForm
 			this._resetMessageForm();
-			this._autoGrowTextZone($event.target);
+			//this._autoGrowTextZone($event.target);
 		}
 	}
 

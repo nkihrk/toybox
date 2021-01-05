@@ -8,22 +8,32 @@ import { LogItem } from '../interfaces/log-item.model';
 })
 export class WebsocketService {
 	private url = 'http://localhost:3333';
-	private socket;
+	private socket = io(this.url);
 
 	constructor() {}
 
-	connect(): void {
-		this.socket = io(this.url);
-	}
-
-	emit($emitName: string, $data: LogItem): void {
-		this.socket.emit($emitName, $data);
+	emit($emitName: string, $payload: any): void {
+		this.socket.emit($emitName, $payload);
 	}
 
 	on($onName: string): Observable<any> {
-		const observable = new Observable((observer) => {
-			this.socket.on($onName, ($data: any) => {
-				observer.next($data);
+		const observable = new Observable((observer: any) => {
+			this.socket.on($onName, ($payload: any) => {
+				observer.next($payload);
+			});
+
+			return () => {
+				this.socket.disconnect();
+			};
+		});
+
+		return observable;
+	}
+
+	once($onName: string): Observable<any> {
+		const observable = new Observable((observer: any) => {
+			this.socket.once($onName, ($payload: any) => {
+				observer.next($payload);
 			});
 
 			return () => {
