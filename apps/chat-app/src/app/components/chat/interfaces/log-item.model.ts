@@ -4,6 +4,7 @@ export interface LogItemClient {
 
 export interface LogItemServer {
 	username: string;
+	userColor: string;
 	message: string;
 	createdAt: Date;
 }

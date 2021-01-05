@@ -7,4 +7,5 @@ export interface User {
 	username: string;
 	roomId: string;
 	icon: string;
+	userColor: string;
 }

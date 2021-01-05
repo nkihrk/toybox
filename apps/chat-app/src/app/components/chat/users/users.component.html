@@ -12,8 +12,13 @@
 		<ul class="user-list">
 			<li class="user-list__user-profile" *ngFor="let user of users | keyvalue">
 				<div class="user-profile" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
-					<div class="user-profile__icon">
-						<img src="user.value.icon" alt="icon" />
+					<div
+						class="user-profile__icon"
+						fxLayout="row"
+						fxLayoutAlign="center center"
+						[ngStyle]="{ 'background-color': user.value.userColor }"
+					>
+						<fa-icon [icon]="faPaw" [fixedWidth]="true" size="sm"></fa-icon>
 					</div>
 					<div class="user-profile__name">{{ user.value.username }}</div>
 				</div>

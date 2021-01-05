@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faPaw } from '@fortawesome/free-solid-svg-icons';
 import { Users } from '../interfaces/user.model';
 
 @Component({
@@ -11,6 +11,7 @@ export class UsersComponent implements OnInit {
 	@Input() users: Users;
 
 	faChevronDown = faChevronDown;
+	faPaw = faPaw;
 
 	constructor() {}
 

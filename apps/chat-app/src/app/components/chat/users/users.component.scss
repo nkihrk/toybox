@@ -40,7 +40,7 @@
 
 	&__icon {
 		@extend %common;
-		@apply w-8 rounded-full;
+		@apply w-8 h-8 rounded-full;
 	}
 
 	&__name {

@@ -27,6 +27,7 @@ export class MessagesGateway implements OnGatewayInit, OnGatewayConnection, OnGa
 		const user: User = this.users[$client.id];
 		const logItem: LogItemServer = {
 			username: user.username,
+			userColor: user.userColor,
 			message: $payload.message,
 			createdAt: new Date()
 		};
@@ -54,7 +55,9 @@ export class MessagesGateway implements OnGatewayInit, OnGatewayConnection, OnGa
 		const user: User = {
 			userId: $client.id,
 			username: 'Guest_' + this._generateUniqueId(),
-			roomId: $payload.roomId
+			roomId: $payload.roomId,
+			icon: '',
+			userColor: '#' + this._getRandomColor()
 		};
 
 		// group the client to a specific room
@@ -92,13 +95,9 @@ export class MessagesGateway implements OnGatewayInit, OnGatewayConnection, OnGa
 		this.logger.log(`Client disconnected: ${$client.id}`);
 
 		const user: User = this.users[$client.id];
+		this._removeUserFromLists(user.roomId, user.userId);
 
-		// removed the user info from the lists
-		delete this.rooms[user.roomId].users[user.userId];
-		delete this.users[user.userId];
-
-		// broadcast a user just has been left the room
-		this.server.to(user.roomId).emit('removeUserToClient', $client.id);
+		this._broadcastRemoveUser(user.roomId, user.userId);
 	}
 
 	handleConnection($client: Socket, ...args: any[]): void {
@@ -107,6 +106,21 @@ export class MessagesGateway implements OnGatewayInit, OnGatewayConnection, OnGa
 
 	private _generateUniqueId(): string {
 		return Math.random().toString(36).substr(2, 9);
+	}
+
+	private _removeUserFromLists($roomId: string, $userId: string): void {
+		// remove a specific user from the lists
+		delete this.rooms[$roomId].users[$userId];
+		delete this.users[$userId];
+	}
+
+	private _broadcastRemoveUser($roomId: string, $userId: string): void {
+		// broadcast a user just has been left the room
+		this.server.to($roomId).emit('removeUserToClient', $userId);
+	}
+
+	private _getRandomColor(): string {
+		return Math.floor(Math.random() * 16777215).toString(16);
 	}
 }
 
@@ -133,6 +147,7 @@ interface User {
 	username: string;
 	roomId: string;
 	icon: string;
+	userColor: string;
 }
 
 interface JoinRoom {
@@ -142,6 +157,7 @@ interface JoinRoom {
 
 interface LogItemServer {
 	username: string;
+	userColor: string;
 	message: string;
 	createdAt: Date;
 }

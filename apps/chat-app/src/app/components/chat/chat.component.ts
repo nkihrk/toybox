@@ -43,7 +43,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 						this.roomId = roomId;
 
 						this._joinRoom(joinRoom);
-						this._connectToWebsocket(this.subscriptions, roomId, roomName);
+						this._connectToWebsocket(roomId, roomName);
 					}
 				},
 				($error: any) => {
@@ -62,17 +62,17 @@ export class ChatComponent implements OnInit, OnDestroy {
 		this.websocketService.emit('getUsers', '');
 	}
 
-	private _connectToWebsocket($subscriptions: Subscription[], $roomId: string, $roomName: string): void {
+	private _connectToWebsocket($roomId: string, $roomName: string): void {
 		this._getUsers();
 
-		$subscriptions.push(
+		this.subscriptions.push(
 			this.websocketService.on('messageToClient').subscribe(($data: LogItemServer) => {
 				console.log($data);
 				this.logItems.push($data);
 
-				//				setTimeout(() => {
-				//					this.chatLogRef.nativeElement.scrollTop = this.chatLogRef.nativeElement.scrollHeight;
-				//				}, 1);
+				setTimeout(() => {
+					this.chatLogRef.nativeElement.scrollTop = this.chatLogRef.nativeElement.scrollHeight;
+				}, 1);
 			}),
 			this.websocketService.on('newUserToClient').subscribe(($data: User) => {
 				console.log($data);
