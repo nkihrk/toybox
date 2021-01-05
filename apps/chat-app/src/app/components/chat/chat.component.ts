@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { WebsocketService } from './services/websocket.service';
+import { WebsocketService } from '../../shared/services/websocket.service';
 import { Subscription } from 'rxjs';
-import { LogItemServer } from './interfaces/log-item.model';
-import { User, Users } from './interfaces/user.model';
-import { JoinRoom } from './interfaces/join-room.model';
+import { LogItemServer } from '../../shared/interfaces/log-item.model';
+import { User, Users } from '../../shared/interfaces/user.model';
+import { JoinRoom } from '../../shared/interfaces/join-room.model';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { validate as uuidValidate } from 'uuid';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { WebsocketService } from '../services/websocket.service';
-import { LogItemClient } from '../interfaces/log-item.model';
+import { WebsocketService } from '../../../shared/services/websocket.service';
+import { LogItemClient } from '../../../shared/interfaces/log-item.model';
 
 @Component({
 	selector: 'toybox-message-input',

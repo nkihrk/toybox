@@ -8,6 +8,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
 	declarations: [],
 	imports: [CommonModule, QuicklinkModule, FlexLayoutModule, FontAwesomeModule, ReactiveFormsModule],
-	exports: [CommonModule, QuicklinkModule, FlexLayoutModule, FontAwesomeModule, QuicklinkModule, ReactiveFormsModule]
+	exports: [CommonModule, QuicklinkModule, FlexLayoutModule, FontAwesomeModule, ReactiveFormsModule]
 })
 export class SharedModule {}

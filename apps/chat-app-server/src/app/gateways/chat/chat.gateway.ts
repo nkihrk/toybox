@@ -13,7 +13,7 @@ import { Socket, Server } from 'socket.io';
 import { Logger } from '@nestjs/common';
 
 @WebSocketGateway()
-export class MessagesGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
+export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
 	@WebSocketServer() server: Server;
 
 	private logger: Logger = new Logger('AppGateway');

@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { WebsocketService } from '../services/websocket.service';
+import { WebsocketService } from '../../../shared/services/websocket.service';
 
 @Component({
 	selector: 'toybox-create-room',
