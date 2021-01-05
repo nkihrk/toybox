@@ -32,18 +32,4 @@ export class WebsocketService {
 
 		return observable;
 	}
-
-	once($onName: string): Observable<any> {
-		const observable = new Observable((observer: any) => {
-			this.socket.once($onName, ($payload: any) => {
-				observer.next($payload);
-			});
-
-			return () => {
-				this.socket.disconnect();
-			};
-		});
-
-		return observable;
-	}
 }
