@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LogItemServer } from '../interfaces/log-item.model';
+import { LogItemServer } from '../../../shared/interfaces/log-item.model';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
