@@ -11,7 +11,9 @@ ChatApp is a Discord-like small chat app.
 </p>
 
 Used: <br>
-Angular, NestJS, socket.io, tailwindcss
+```
+Angular, NestJS, socket.io, helmet, tailwindcss, angular/flex-layout, angular-fontawesome
+```
 
 Usage:
 ```
