@@ -48,6 +48,14 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 		return { event: 'getUsers', data: users };
 	}
 
+	@SubscribeMessage('getRoomName')
+	getRoomName(@ConnectedSocket() $client: Socket): WsResponse<string> {
+		const roomId: string = this.users[$client.id].roomId;
+		const roomName: string = this.rooms[roomId].roomName;
+
+		return { event: 'getRoomName', data: roomName };
+	}
+
 	@SubscribeMessage('joinRoom')
 	createRoom(@MessageBody() $payload: JoinRoom, @ConnectedSocket() $client: Socket): void {
 		//this.logger.log($payload);
@@ -95,8 +103,14 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 		this.logger.log(`Client disconnected: ${$client.id}`);
 
 		const user: User = this.users[$client.id];
+
+		// remove a specific user from the lists
 		this._removeUserFromLists(user.roomId, user.userId);
 
+		const userIds: UserIds = this.rooms[user.roomId].users;
+		if (Object.keys(userIds).length === 0 && userIds.constructor === Object) this._removeRoomFromList(user.roomId);
+
+		// broadcast a user just has been left the room
 		this._broadcastRemoveUser(user.roomId, user.userId);
 	}
 
@@ -109,13 +123,15 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 	}
 
 	private _removeUserFromLists($roomId: string, $userId: string): void {
-		// remove a specific user from the lists
 		delete this.rooms[$roomId].users[$userId];
 		delete this.users[$userId];
 	}
 
+	private _removeRoomFromList($roomId: string): void {
+		delete this.rooms[$roomId];
+	}
+
 	private _broadcastRemoveUser($roomId: string, $userId: string): void {
-		// broadcast a user just has been left the room
 		this.server.to($roomId).emit('removeUserToClient', $userId);
 	}
 
