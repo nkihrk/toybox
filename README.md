@@ -10,7 +10,7 @@ ToyBox is my experimental repos.
 ChatApp is a Discord-like small chat app.
 </p>
 
-Used:
+Used: <br>
 Angular, NestJS, socket.io, tailwindcss
 
 Usage:
