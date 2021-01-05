@@ -1,0 +1,32 @@
+.screen-wrapper {
+	@apply fixed bg-black bg-opacity-80 inset-0;
+}
+
+.create-room {
+	@apply bg-discord-dark rounded-md overflow-hidden;
+
+	&__title {
+		@apply bg-discord-darkest text-center py-5 font-bold text-white text-xl select-none;
+	}
+
+	&__form {
+		@apply p-5;
+	}
+}
+
+.room-form {
+	@apply text-discord-lightest font-bold;
+
+	&__name {
+		@apply block text-sm mb-2 select-none;
+	}
+
+	&__input {
+		@apply bg-discord-darkest rounded overflow-hidden mr-2 p-2 text-sm placeholder-opacity-50 w-80;
+		@apply focus:outline-none;
+	}
+
+	&__button {
+		@apply bg-blue-500 rounded px-6 py-2 text-sm font-bold select-none;
+	}
+}
