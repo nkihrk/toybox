@@ -57,6 +57,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 		this.websocketService.emit('joinRoom', $joinRoom);
 	}
 
+
 	private _getUsers(): void {
 		// get all users in the current room
 		this.websocketService.emit('getUsers', '');
@@ -88,4 +89,5 @@ export class ChatComponent implements OnInit, OnDestroy {
 			})
 		);
 	}
+
 }

@@ -1,5 +1,9 @@
-export interface LogItem {
-	name: string;
-	post: string;
+export interface LogItemClient {
+	message: string;
+}
+
+export interface LogItemServer {
+	username: string;
+	message: string;
 	createdAt: Date;
 }

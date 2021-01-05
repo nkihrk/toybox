@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { WebsocketService } from '../services/websocket.service';
 
 @Component({
 	selector: 'toybox-create-room',
@@ -17,7 +18,12 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
 
 	private subscriptions: Subscription[] = [];
 
-	constructor(private builder: FormBuilder, private route: ActivatedRoute, private router: Router) {}
+	constructor(
+		private builder: FormBuilder,
+		private route: ActivatedRoute,
+		private router: Router,
+		private websocketService: WebsocketService
+	) {}
 
 	ngOnInit(): void {
 		this._createForm();

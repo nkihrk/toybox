@@ -1,15 +1,15 @@
 <ul class="log-list">
-	<li class="log-list__item" *ngFor="let item of logItems">
+	<li class="log-list__item" *ngFor="let logItem of logItems">
 		<div class="log-item" fxLayout="row" fxLayoutAlign="start start">
 			<div class="log-item__icon">
-				<img src="https://pbs.twimg.com/profile_images/1228057595237163008/UngMPY83_400x400.png" alt="icon" />
+				<img src="logItem.icon" alt="icon" />
 			</div>
 			<div class="log-item__content" fxFlex>
 				<div class="content-description" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5rem">
-					<div class="content-description__name">{{ item.name }}</div>
-					<div class="content-description__time">{{ item.createdAt | date: 'shortTime' }}</div>
+					<div class="content-description__name">{{ logItem.username }}</div>
+					<div class="content-description__time">{{ logItem.createdAt | date: 'shortTime' }}</div>
 				</div>
-				<div class="content-post">{{ item.post }}</div>
+				<div class="content-post">{{ logItem.message }}</div>
 			</div>
 		</div>
 	</li>
