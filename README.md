@@ -15,7 +15,7 @@ Used: <br>
 Angular, NestJS, socket.io, helmet, tailwindcss, angular/flex-layout, angular-fontawesome
 ```
 
-Usage:
+How to run:
 ```
 > nx run chat-app:serve // frontend
 > nx run chat-app-server:serve // backend
