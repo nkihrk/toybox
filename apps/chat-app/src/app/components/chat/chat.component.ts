@@ -39,6 +39,9 @@ export class ChatComponent implements OnInit, OnDestroy {
 					const roomName: string = $params.get('name') || 'ChatApp room';
 					const joinRoom: JoinRoom = { roomId, roomName };
 
+					// initialize data first
+					this._releaseData();
+
 					if (uuidValidate(roomId)) {
 						this.roomId = roomId;
 
@@ -94,5 +97,11 @@ export class ChatComponent implements OnInit, OnDestroy {
 
 	private _getUsers(): void {
 		this.websocketService.emit('getUsers', '');
+	}
+
+	private _releaseData(): void {
+		this.logItems = [];
+		this.roomId = '';
+		this.users = {};
 	}
 }
