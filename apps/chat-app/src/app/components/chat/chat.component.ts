@@ -18,6 +18,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 	logItems: LogItemServer[] = [];
 	roomId = '';
 	users: Users = {};
+	roomName = '';
 
 	private subscriptions: Subscription[] = [];
 
@@ -65,8 +66,19 @@ export class ChatComponent implements OnInit, OnDestroy {
 		// get all users in the current room
 		this._getUsers();
 
+		// get a room name
+		this._getRoomName();
+
 		// broadcast listeners
 		this.subscriptions.push(
+			this.websocketService.on('getUsers').subscribe(($data: Users) => {
+				console.log($data);
+				this.users = $data;
+			}),
+			this.websocketService.on('getRoomName').subscribe(($data: string) => {
+				console.log($data);
+				this.roomName = $data;
+			}),
 			this.websocketService.on('messageToClient').subscribe(($data: LogItemServer) => {
 				console.log($data);
 				this.logItems.push($data);
@@ -80,10 +92,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 				console.log($data);
 				this.users[$data.userId] = $data;
 			}),
-			this.websocketService.on('getUsers').subscribe(($data: Users) => {
-				console.log($data);
-				this.users = $data;
-			}),
+
 			this.websocketService.on('removeUserToClient').subscribe(($data: string) => {
 				console.log($data);
 				delete this.users[$data];
@@ -99,9 +108,14 @@ export class ChatComponent implements OnInit, OnDestroy {
 		this.websocketService.emit('getUsers', '');
 	}
 
+	private _getRoomName(): void {
+		this.websocketService.emit('getRoomName', '');
+	}
+
 	private _releaseData(): void {
 		this.logItems = [];
 		this.roomId = '';
 		this.users = {};
+		this.roomName = '';
 	}
 }
