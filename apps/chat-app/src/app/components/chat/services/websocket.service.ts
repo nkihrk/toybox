@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs';
-import { LogItem } from '../interfaces/log-item.model';
 
 @Injectable({
 	providedIn: 'root'

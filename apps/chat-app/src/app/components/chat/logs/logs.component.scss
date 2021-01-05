@@ -9,7 +9,7 @@
 	@apply cursor-default;
 
 	&__icon {
-		@apply w-10 rounded-full overflow-hidden cursor-pointer select-none;
+		@apply w-10 h-10 rounded-full overflow-hidden cursor-pointer select-none;
 	}
 
 	&__content {

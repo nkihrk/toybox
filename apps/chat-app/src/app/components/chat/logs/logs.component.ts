@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LogItem } from '../interfaces/log-item.model';
+import { LogItemServer } from '../interfaces/log-item.model';
+import { faPaw } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
 	selector: 'toybox-logs',
@@ -7,7 +8,9 @@ import { LogItem } from '../interfaces/log-item.model';
 	styleUrls: ['./logs.component.scss']
 })
 export class LogsComponent implements OnInit {
-	@Input() logItems: LogItem[];
+	@Input() logItems: LogItemServer[];
+
+	faPaw = faPaw;
 
 	constructor() {}
 

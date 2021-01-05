@@ -1,8 +1,13 @@
 <ul class="log-list">
 	<li class="log-list__item" *ngFor="let logItem of logItems">
 		<div class="log-item" fxLayout="row" fxLayoutAlign="start start">
-			<div class="log-item__icon">
-				<img src="logItem.icon" alt="icon" />
+			<div
+				class="log-item__icon"
+				fxLayout="row"
+				fxLayoutAlign="center center"
+				[ngStyle]="{ 'background-color': logItem.userColor }"
+			>
+				<fa-icon [icon]="faPaw" [fixedWidth]="true" size="lg"></fa-icon>
 			</div>
 			<div class="log-item__content" fxFlex>
 				<div class="content-description" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5rem">
