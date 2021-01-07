@@ -1,7 +1,10 @@
 .status {
-	@apply border-b border-discord-darkest p-2;
+	@apply border-b p-2;
+	@apply border-discord-darkest;
 
 	&__content {
-		@apply font-bold select-none p-2;
+		@apply p-2;
+		@apply font-bold;
+		@apply select-none;
 	}
 }

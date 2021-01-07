@@ -1,5 +1,6 @@
 .wrapper {
-	@apply h-screen bg-discord-light text-discord-lightest;
+	@apply h-screen;
+	@apply bg-discord-light text-discord-lightest;
 
 	&__section {
 		&--dark {

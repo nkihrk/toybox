@@ -15,6 +15,14 @@ export class WebsocketService {
 		this.socket = io(this.url);
 	}
 
+	disconnect(): void {
+		this.socket.disconnect();
+	}
+
+	get io(): any {
+		return this.socket;
+	}
+
 	emit($emitName: string, $payload: any): void {
 		this.socket.emit($emitName, $payload);
 	}

@@ -1,12 +1,16 @@
 .screen-wrapper {
-	@apply fixed bg-black bg-opacity-70 inset-0;
+	@apply fixed inset-0;
+	@apply bg-black bg-opacity-70;
 }
 
 .create-room {
-	@apply bg-discord-dark rounded-md overflow-hidden;
+	@apply rounded-md overflow-hidden;
+	@apply bg-discord-dark;
 
 	&__title {
-		@apply bg-discord-darkest text-center py-5 font-bold text-white text-xl select-none;
+		@apply text-center py-5;
+		@apply bg-discord-darkest font-bold text-white text-xl;
+		@apply select-none;
 	}
 
 	&__form {
@@ -15,18 +19,32 @@
 }
 
 .room-form {
-	@apply text-discord-lightest font-bold;
+	%description-common-style {
+		@apply mb-2;
+		@apply text-sm;
+		@apply select-none;
+	}
 
 	&__name {
-		@apply block text-sm mb-2 select-none;
+		@extend %description-common-style;
+		@apply block;
+		@apply text-discord-lightest font-bold;
+	}
+
+	&__error {
+		@extend %description-common-style;
+		@apply text-red-600 text-opacity-80;
 	}
 
 	&__input {
-		@apply bg-discord-darkest rounded overflow-hidden mr-2 p-2 text-sm placeholder-opacity-50 w-80;
+		@apply rounded overflow-hidden mr-2 p-2 w-80;
+		@apply bg-discord-darkest text-sm placeholder-opacity-50 text-discord-lightest;
 		@apply focus:outline-none;
 	}
 
 	&__button {
-		@apply bg-blue-500 rounded px-6 py-2 text-sm font-bold select-none;
+		@apply rounded px-6 py-2;
+		@apply bg-blue-500 text-sm font-bold text-discord-lightest font-bold;
+		@apply select-none cursor-pointer;
 	}
 }

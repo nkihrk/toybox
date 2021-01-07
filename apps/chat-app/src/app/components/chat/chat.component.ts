@@ -43,6 +43,9 @@ export class ChatComponent implements OnInit, OnDestroy {
 					// initialize data first
 					this._releaseData();
 
+					// disconnect previous connection if exists
+					if (this._isConnected()) this.websocketService.disconnect();
+
 					if (uuidValidate(roomId)) {
 						this.roomId = roomId;
 
@@ -69,7 +72,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 		// get a room name
 		this._getRoomName();
 
-		// broadcast listeners
+		// get data from a server
 		this.subscriptions.push(
 			this.websocketService.on('getUsers').subscribe(($data: Users) => {
 				console.log($data);
@@ -78,7 +81,11 @@ export class ChatComponent implements OnInit, OnDestroy {
 			this.websocketService.on('getRoomName').subscribe(($data: string) => {
 				console.log($data);
 				this.roomName = $data;
-			}),
+			})
+		);
+
+		// broadcast listeners
+		this.subscriptions.push(
 			this.websocketService.on('messageToClient').subscribe(($data: LogItemServer) => {
 				console.log($data);
 				this.logItems.push($data);
@@ -92,7 +99,6 @@ export class ChatComponent implements OnInit, OnDestroy {
 				console.log($data);
 				this.users[$data.userId] = $data;
 			}),
-
 			this.websocketService.on('removeUserToClient').subscribe(($data: string) => {
 				console.log($data);
 				delete this.users[$data];
@@ -117,5 +123,9 @@ export class ChatComponent implements OnInit, OnDestroy {
 		this.roomId = '';
 		this.users = {};
 		this.roomName = '';
+	}
+
+	private _isConnected(): boolean {
+		return this.websocketService.io ? this.websocketService.io.connected : false;
 	}
 }

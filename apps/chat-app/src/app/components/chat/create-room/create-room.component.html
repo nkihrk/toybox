@@ -5,7 +5,7 @@
 			<form class="room-form" #formCheck="ngForm" [formGroup]="createRoomForm">
 				<label class="room-form__name" for="room-name">Room name</label>
 				<ng-container *ngIf="isShowErrors">
-					<div class="room-form__error" [hidden]="!roomNameControl.errors?.required">The name is required</div>
+					<div class="room-form__error" [hidden]="!roomNameControl.errors?.required">Name is required</div>
 				</ng-container>
 				<input
 					id="room-name"

@@ -9,7 +9,8 @@
 	@apply cursor-default;
 
 	&__icon {
-		@apply w-10 h-10 rounded-full overflow-hidden cursor-pointer select-none;
+		@apply w-10 h-10 rounded-full overflow-hidden;
+		@apply cursor-pointer select-none;
 	}
 
 	&__content {
@@ -19,8 +20,9 @@
 
 .content-description {
 	&__name {
-		@apply text-white cursor-pointer;
+		@apply text-white;
 		@apply hover:underline;
+		@apply cursor-pointer;
 	}
 
 	&__time {
@@ -30,7 +32,8 @@
 
 .content-post {
 	a {
-		@apply text-blue-400  cursor-pointer;
+		@apply text-blue-400;
 		@apply hover:underline;
+		@apply cursor-pointer;
 	}
 }
