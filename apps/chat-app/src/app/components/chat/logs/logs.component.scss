@@ -1,3 +1,7 @@
+.logs-wrapper {
+	@apply h-full;
+}
+
 .log-list {
 	&__item {
 		@apply my-6 py-1 pl-5;
