@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { WebsocketService } from '../../shared/services/websocket.service';
 import { Subscription } from 'rxjs';
-import { JoinRoom, User, Users, LogItemServer } from '@toybox/api-interfaces';
+import { JoinRoom, User, Users, LogItemServer } from '@toybox/chat-app-interfaces';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { validate as uuidValidate } from 'uuid';
 

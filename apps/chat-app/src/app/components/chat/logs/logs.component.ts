@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LogItemServer } from '@toybox/api-interfaces';
+import { LogItemServer } from '@toybox/chat-app-interfaces';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

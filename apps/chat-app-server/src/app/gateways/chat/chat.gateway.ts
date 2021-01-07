@@ -11,7 +11,7 @@ import {
 } from '@nestjs/websockets';
 import { Socket, Server } from 'socket.io';
 import { Logger } from '@nestjs/common';
-import { JoinRoom, User, Users, LogItemServer, LogItemClient, Rooms, Room, UserIds } from '@toybox/api-interfaces';
+import { JoinRoom, User, Users, LogItemServer, LogItemClient, Rooms, Room, UserIds } from '@toybox/chat-app-interfaces';
 
 @WebSocketGateway()
 export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
