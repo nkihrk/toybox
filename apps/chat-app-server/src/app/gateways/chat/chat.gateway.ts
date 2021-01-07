@@ -11,6 +11,7 @@ import {
 } from '@nestjs/websockets';
 import { Socket, Server } from 'socket.io';
 import { Logger } from '@nestjs/common';
+import { JoinRoom, User, Users, LogItemServer, LogItemClient, Rooms, Room, UserIds } from '@toybox/api-interfaces';
 
 @WebSocketGateway()
 export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
@@ -138,46 +139,4 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 	private _getRandomColor(): string {
 		return Math.floor(Math.random() * 16777215).toString(16);
 	}
-}
-
-interface Rooms {
-	[key: string]: Room;
-}
-
-interface Room {
-	roomId: string;
-	roomName: string;
-	users: UserIds;
-}
-
-interface UserIds {
-	[key: string]: boolean;
-}
-
-interface Users {
-	[key: string]: User;
-}
-
-interface User {
-	userId: string;
-	username: string;
-	roomId: string;
-	icon: string;
-	userColor: string;
-}
-
-interface JoinRoom {
-	roomId: string;
-	roomName: string;
-}
-
-interface LogItemServer {
-	username: string;
-	userColor: string;
-	message: string;
-	createdAt: Date;
-}
-
-interface LogItemClient {
-	message: string;
 }
