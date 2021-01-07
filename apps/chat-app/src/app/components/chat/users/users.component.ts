@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faChevronDown, faPaw } from '@fortawesome/free-solid-svg-icons';
-import { Users } from '../../../shared/interfaces/user.model';
+import { Users } from '@toybox/api-interfaces';
 
 @Component({
 	selector: 'toybox-users',
