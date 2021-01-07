@@ -45,6 +45,9 @@
 		},
 		"chat-app-server": {
 			"tags": []
+		},
+		"api-interfaces": {
+			"tags": []
 		}
 	}
 }
