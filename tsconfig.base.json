@@ -15,7 +15,7 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
-			"@toybox/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+			"@toybox/chat-app-interfaces": ["libs/chat-app-interfaces/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]

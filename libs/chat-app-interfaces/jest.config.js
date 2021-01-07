@@ -1,5 +1,5 @@
 module.exports = {
-	displayName: 'api-interfaces',
+	displayName: 'chat-app-interfaces',
 	preset: '../../jest.preset.js',
 	globals: {
 		'ts-jest': {
@@ -10,5 +10,5 @@ module.exports = {
 		'^.+\\.[tj]sx?$': 'ts-jest'
 	},
 	moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-	coverageDirectory: '../../coverage/libs/api-interfaces'
+	coverageDirectory: '../../coverage/libs/chat-app-interfaces'
 };

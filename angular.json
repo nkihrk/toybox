@@ -378,22 +378,22 @@
 				}
 			}
 		},
-		"api-interfaces": {
-			"root": "libs/api-interfaces",
-			"sourceRoot": "libs/api-interfaces/src",
+		"chat-app-interfaces": {
+			"root": "libs/chat-app-interfaces",
+			"sourceRoot": "libs/chat-app-interfaces/src",
 			"projectType": "library",
 			"architect": {
 				"lint": {
 					"builder": "@nrwl/linter:eslint",
 					"options": {
-						"lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+						"lintFilePatterns": ["libs/chat-app-interfaces/**/*.ts"]
 					}
 				},
 				"test": {
 					"builder": "@nrwl/jest:jest",
-					"outputs": ["coverage/libs/api-interfaces"],
+					"outputs": ["coverage/libs/chat-app-interfaces"],
 					"options": {
-						"jestConfig": "libs/api-interfaces/jest.config.js",
+						"jestConfig": "libs/chat-app-interfaces/jest.config.js",
 						"passWithNoTests": true
 					}
 				}
