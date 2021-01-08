@@ -7,6 +7,7 @@ ToyBox is just an experimental monorepo.
 ## Installation
 
 ```
+> git clone git@github.com:nkihrk/toybox.git
 > yarn global add nx
 > cd ./toybox
 > yarn install
