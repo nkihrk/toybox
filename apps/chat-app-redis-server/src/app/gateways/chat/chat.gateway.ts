@@ -12,6 +12,7 @@ import {
 import { Socket, Server } from 'socket.io';
 import { Logger } from '@nestjs/common';
 import { JoinRoom, User, Users, LogItemServer, LogItemClient, Rooms, Room, UserIds } from '@toybox/chat-app-interfaces';
+import { RedisCacheService } from '../../redis-cache/services/redis-cache.service';
 
 @WebSocketGateway()
 export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
@@ -20,6 +21,10 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 	private logger: Logger = new Logger('ChatGateway');
 	private rooms: Rooms = {};
 	private users: Users = {};
+
+	constructor(private redisCacheService: RedisCacheService) {
+		this.logger.log(redisCacheService.get('a'));
+	}
 
 	@SubscribeMessage('messageToServer')
 	handleMessage(@MessageBody() $payload: LogItemClient, @ConnectedSocket() $client: Socket): void {
