@@ -33,14 +33,14 @@ export class MessageInputComponent implements OnInit {
 	}
 
 	onKeyUp($event: any): void {
-		this._autoGrowTextZone($event.target);
+		//this._autoGrowTextZone($event.target);
 
 		if ($event.keyCode === 16) this.isShiftKey = false;
 		if ($event.keyCode !== 13) return;
 
 		if (this.isShiftKey) {
 		} else {
-			const message: string = this.messageForm.value.trim();
+			const message: string = this.messageForm.value?.trim() || '';
 
 			if (message === '') return;
 
