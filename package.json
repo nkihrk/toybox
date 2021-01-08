@@ -56,6 +56,8 @@
 		"@nguniversal/express-engine": "^11.0.1",
 		"@nrwl/angular": "11.0.18",
 		"@nrwl/nx-cloud": "^10.1.10",
+		"cache-manager": "^3.4.0",
+		"cache-manager-redis-store": "^2.0.0",
 		"express": "^4.15.2",
 		"helmet": "^4.3.1",
 		"ngx-quicklink": "^0.2.6",
