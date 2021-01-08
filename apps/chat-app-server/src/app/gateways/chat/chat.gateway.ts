@@ -39,7 +39,7 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 	@SubscribeMessage('getUsers')
 	getUsers(@ConnectedSocket() $client: Socket): WsResponse<Users> {
 		const roomId: string = this.users[$client.id].roomId;
-		const userIds: UserIds = this.rooms[roomId].users;
+		const userIds: UserIds = this.rooms[roomId].userIds;
 		const users: Users = {};
 
 		for (const userId in userIds) {
@@ -59,7 +59,7 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 
 	@SubscribeMessage('joinRoom')
 	createRoom(@MessageBody() $payload: JoinRoom, @ConnectedSocket() $client: Socket): void {
-		//this.logger.log($payload);
+		this.logger.log($payload);
 
 		const user: User = {
 			userId: $client.id,
@@ -69,7 +69,7 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 			userColor: '#' + this._getRandomColor()
 		};
 
-		// group the client to a specific room
+		// group the client with a specific room
 		$client.join($payload.roomId, ($error) => {
 			if ($error) this.logger.error($error);
 		});
@@ -79,14 +79,14 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 			const room: Room = {
 				roomId: $payload.roomId,
 				roomName: $payload.roomName,
-				users: {
+				userIds: {
 					[$client.id]: true
 				}
 			};
 
 			this.rooms[$payload.roomId] = room;
 		} else {
-			this.rooms[$payload.roomId].users[$client.id] = true;
+			this.rooms[$payload.roomId].userIds[$client.id] = true;
 		}
 
 		// user
@@ -111,7 +111,7 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 		// remove a specific user from the lists
 		this._removeUserFromLists(user.roomId, user.userId);
 
-		const userIds: UserIds = this.rooms[user.roomId].users;
+		const userIds: UserIds = this.rooms[user.roomId].userIds;
 		if (Object.keys(userIds).length === 0 && userIds.constructor === Object) this._removeRoomFromList(user.roomId);
 
 		// broadcast a user just has been left the room
@@ -127,7 +127,7 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 	}
 
 	private _removeUserFromLists($roomId: string, $userId: string): void {
-		delete this.rooms[$roomId].users[$userId];
+		delete this.rooms[$roomId].userIds[$userId];
 		delete this.users[$userId];
 	}
 

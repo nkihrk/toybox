@@ -5,7 +5,7 @@ export interface Rooms {
 export interface Room {
 	roomId: string;
 	roomName: string;
-	users: UserIds;
+	userIds: UserIds;
 }
 
 export interface UserIds {
