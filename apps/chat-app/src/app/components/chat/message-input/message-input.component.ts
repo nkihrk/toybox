@@ -25,14 +25,14 @@ export class MessageInputComponent implements OnInit {
 		this.messageForm.setValue('');
 	}
 
-	onKeyDown($event: any): void {
+	onKeyDown($event: KeyboardEvent): void {
 		if ($event.keyCode === 13) {
 		} else if ($event.keyCode == 16) {
 			this.isShiftKey = true;
 		}
 	}
 
-	onKeyUp($event: any): void {
+	onKeyUp($event: KeyboardEvent): void {
 		//this._autoGrowTextZone($event.target);
 
 		if ($event.keyCode === 16) this.isShiftKey = false;

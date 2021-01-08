@@ -57,7 +57,7 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
 				// reset form
 				this.createRoomForm.get('roomName').setValue('');
 			},
-			($error: any) => {
+			() => {
 				this._resetFlags();
 			}
 		);
@@ -88,7 +88,7 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
 						this.isCreateRoom = true;
 					}
 				},
-				($error: any) => {
+				() => {
 					this.isCreateRoom = true;
 				}
 			)

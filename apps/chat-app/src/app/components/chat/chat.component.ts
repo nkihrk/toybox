@@ -50,7 +50,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 						this._connectToWebsocket(roomId, roomName, joinRoom);
 					}
 				},
-				($error: any) => {
+				($error) => {
 					console.log($error);
 				}
 			)

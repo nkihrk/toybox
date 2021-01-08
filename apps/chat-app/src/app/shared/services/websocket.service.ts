@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
-import { Observable } from 'rxjs';
+import { Observable, NextObserver } from 'rxjs';
+import { JoinRoom, LogItemClient, LogItemServer, Users, User } from '@toybox/chat-app-interfaces';
+
+type On = LogItemServer | Users | User | string;
 
 @Injectable({
 	providedIn: 'root'
 })
 export class WebsocketService {
 	private url = 'http://localhost:3333';
-	private socket;
-
-	constructor() {}
+	private socket: SocketIOClient.Socket;
 
 	connect(): void {
 		this.socket = io(this.url);
@@ -19,23 +20,19 @@ export class WebsocketService {
 		this.socket.disconnect();
 	}
 
-	get io(): any {
+	get io(): SocketIOClient.Socket {
 		return this.socket;
 	}
 
-	emit($emitName: string, $payload: any): void {
+	emit($emitName: string, $payload: JoinRoom | LogItemClient | string): void {
 		this.socket.emit($emitName, $payload);
 	}
 
-	on($onName: string): Observable<any> {
-		const observable = new Observable((observer: any) => {
-			this.socket.on($onName, ($payload: any) => {
+	on($onName: string): Observable<On> {
+		const observable = new Observable<On>((observer: NextObserver<On>) => {
+			this.socket.on($onName, ($payload: On) => {
 				observer.next($payload);
 			});
-
-			return () => {
-				this.socket.disconnect();
-			};
 		});
 
 		return observable;

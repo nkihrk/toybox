@@ -1,14 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
 	selector: 'toybox-status',
 	templateUrl: './status.component.html',
 	styleUrls: ['./status.component.scss']
 })
-export class StatusComponent implements OnInit {
+export class StatusComponent {
 	@Input() roomName: string;
-
-	constructor() {}
-
-	ngOnInit(): void {}
 }

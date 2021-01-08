@@ -17,7 +17,7 @@ import { JoinRoom, User, Users, LogItemServer, LogItemClient, Rooms, Room, UserI
 export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
 	@WebSocketServer() server: Server;
 
-	private logger: Logger = new Logger('AppGateway');
+	private logger: Logger = new Logger('ChatGateway');
 	private rooms: Rooms = {};
 	private users: Users = {};
 
@@ -70,7 +70,7 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 		};
 
 		// group the client to a specific room
-		$client.join($payload.roomId, ($error: any) => {
+		$client.join($payload.roomId, ($error) => {
 			if ($error) this.logger.error($error);
 		});
 
@@ -96,14 +96,17 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 		this.server.to($payload.roomId).emit('newUserToClient', user);
 	}
 
-	afterInit($server: Server): void {
+	afterInit(): void {
 		this.logger.log('Init');
 	}
 
-	handleDisconnect($client: Socket): void {
+	handleDisconnect(@ConnectedSocket() $client: Socket): void {
 		this.logger.log(`Client disconnected: ${$client.id}`);
 
 		const user: User = this.users[$client.id];
+
+		this.logger.log(`Disconnected user: ${user}`);
+		if (!user) return;
 
 		// remove a specific user from the lists
 		this._removeUserFromLists(user.roomId, user.userId);
@@ -115,7 +118,7 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 		this._broadcastRemoveUser(user.roomId, user.userId);
 	}
 
-	handleConnection($client: Socket, ...args: any[]): void {
+	handleConnection(@ConnectedSocket() $client: Socket): void {
 		this.logger.log(`Client connected: ${$client.id}`);
 	}
 
