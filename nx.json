@@ -26,17 +26,6 @@
 		}
 	},
 	"projects": {
-		"test-websocket": {
-			"tags": []
-		},
-		"test-websocket-e2e": {
-			"tags": [],
-			"implicitDependencies": ["test-websocket"]
-		},
-		"websocket-server": {
-			"tags": [],
-			"implicitDependencies": ["test-websocket"]
-		},
 		"chat-app": {
 			"tags": []
 		},

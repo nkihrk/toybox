@@ -25,11 +25,7 @@
 		"update": "nx migrate latest",
 		"workspace-generator": "nx workspace-generator",
 		"dep-graph": "nx dep-graph",
-		"help": "nx help",
-		"dev:ssr": "ng run test-websocket:serve-ssr",
-		"serve:ssr": "node dist/test-websocket/server/main.js",
-		"build:ssr": "NODE_ENV=production ng build --prod test-websocket && ng run test-websocket:server:production",
-		"prerender": "ng run test-websocket:prerender"
+		"help": "nx help"
 	},
 	"private": true,
 	"dependencies": {
