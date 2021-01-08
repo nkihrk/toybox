@@ -5,6 +5,8 @@ module.exports = {
 		'<rootDir>/apps/chat-app',
 		'<rootDir>/apps/chat-app-server',
 		'<rootDir>/libs/api-interfaces',
-		'<rootDir>/libs/chat-app-interfaces'
+		'<rootDir>/libs/chat-app-interfaces',
+		'<rootDir>/apps/chat-app-redis',
+		'<rootDir>/apps/chat-app-redis-server'
 	]
 };

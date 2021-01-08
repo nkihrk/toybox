@@ -187,6 +187,166 @@
 					}
 				}
 			}
+		},
+		"chat-app-redis": {
+			"projectType": "application",
+			"root": "apps/chat-app-redis",
+			"sourceRoot": "apps/chat-app-redis/src",
+			"prefix": "toybox",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						"outputPath": "dist/apps/chat-app-redis",
+						"index": "apps/chat-app-redis/src/index.html",
+						"main": "apps/chat-app-redis/src/main.ts",
+						"polyfills": "apps/chat-app-redis/src/polyfills.ts",
+						"tsConfig": "apps/chat-app-redis/tsconfig.app.json",
+						"aot": true,
+						"assets": ["apps/chat-app-redis/src/favicon.ico", "apps/chat-app-redis/src/assets"],
+						"styles": ["apps/chat-app-redis/src/styles.scss"],
+						"scripts": []
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "apps/chat-app-redis/src/environments/environment.ts",
+									"with": "apps/chat-app-redis/src/environments/environment.prod.ts"
+								}
+							],
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"namedChunks": false,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"options": {
+						"browserTarget": "chat-app-redis:build",
+						"proxyConfig": "apps/chat-app-redis/proxy.conf.json"
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "chat-app-redis:build:production"
+						}
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n",
+					"options": {
+						"browserTarget": "chat-app-redis:build"
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": ["apps/chat-app-redis/src/**/*.ts", "apps/chat-app-redis/src/**/*.html"]
+					}
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/apps/chat-app-redis"],
+					"options": {
+						"jestConfig": "apps/chat-app-redis/jest.config.js",
+						"passWithNoTests": true
+					}
+				}
+			}
+		},
+		"chat-app-redis-e2e": {
+			"root": "apps/chat-app-redis-e2e",
+			"sourceRoot": "apps/chat-app-redis-e2e/src",
+			"projectType": "application",
+			"architect": {
+				"e2e": {
+					"builder": "@nrwl/cypress:cypress",
+					"options": {
+						"cypressConfig": "apps/chat-app-redis-e2e/cypress.json",
+						"tsConfig": "apps/chat-app-redis-e2e/tsconfig.e2e.json",
+						"devServerTarget": "chat-app-redis:serve"
+					},
+					"configurations": {
+						"production": {
+							"devServerTarget": "chat-app-redis:serve:production"
+						}
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": ["apps/chat-app-redis-e2e/**/*.{js,ts}"]
+					}
+				}
+			}
+		},
+		"chat-app-redis-server": {
+			"root": "apps/chat-app-redis-server",
+			"sourceRoot": "apps/chat-app-redis-server/src",
+			"projectType": "application",
+			"prefix": "chat-app-redis-server",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/node:build",
+					"outputs": ["{options.outputPath}"],
+					"options": {
+						"outputPath": "dist/apps/chat-app-redis-server",
+						"main": "apps/chat-app-redis-server/src/main.ts",
+						"tsConfig": "apps/chat-app-redis-server/tsconfig.app.json",
+						"assets": ["apps/chat-app-redis-server/src/assets"]
+					},
+					"configurations": {
+						"production": {
+							"optimization": true,
+							"extractLicenses": true,
+							"inspect": false,
+							"fileReplacements": [
+								{
+									"replace": "apps/chat-app-redis-server/src/environments/environment.ts",
+									"with": "apps/chat-app-redis-server/src/environments/environment.prod.ts"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@nrwl/node:execute",
+					"options": {
+						"buildTarget": "chat-app-redis-server:build"
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": ["apps/chat-app-redis-server/**/*.ts"]
+					}
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/apps/chat-app-redis-server"],
+					"options": {
+						"jestConfig": "apps/chat-app-redis-server/jest.config.js",
+						"passWithNoTests": true
+					}
+				}
+			}
 		}
 	},
 	"cli": {
@@ -214,5 +374,6 @@
 		"@nrwl/angular:component": {
 			"style": "scss"
 		}
-	}
+	},
+	"defaultProject": "chat-app-redis-server"
 }
