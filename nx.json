@@ -34,7 +34,8 @@
 			"implicitDependencies": ["test-websocket"]
 		},
 		"websocket-server": {
-			"tags": []
+			"tags": [],
+			"implicitDependencies": ["test-websocket"]
 		},
 		"chat-app": {
 			"tags": []
@@ -44,7 +45,8 @@
 			"implicitDependencies": ["chat-app"]
 		},
 		"chat-app-server": {
-			"tags": []
+			"tags": [],
+			"implicitDependencies": ["chat-app"]
 		},
 		"chat-app-interfaces": {
 			"tags": []
