@@ -48,7 +48,8 @@
 			"implicitDependencies": ["chat-app-redis"]
 		},
 		"chat-app-redis-server": {
-			"tags": []
+			"tags": [],
+			"implicitDependencies": ["chat-app-redis"]
 		}
 	}
 }
