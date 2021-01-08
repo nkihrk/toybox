@@ -8,6 +8,7 @@ ToyBox is just an experimental monorepo.
 
 ```
 > yarn global add nx
+> cd ./toybox
 > yarn install
 ```
 
