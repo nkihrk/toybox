@@ -1,0 +1,19 @@
+<div class="wrapper" fxLayout="row">
+	<nav class="wrapper__section wrapper__section--dark" fxFlex="250px">
+		<toybox-users [users]="users"></toybox-users>
+	</nav>
+
+	<main class="wrapper__section" fxFlex fxLayout="column">
+		<toybox-status [roomName]="roomName"></toybox-status>
+
+		<div class="chat" fxFlex fxLayout="column">
+			<div class="chat__log" #chatLog fxFlex>
+				<toybox-logs [logItems]="logItems"></toybox-logs>
+			</div>
+
+			<toybox-message-input [roomId]="roomId"></toybox-message-input>
+		</div>
+	</main>
+</div>
+
+<toybox-create-room></toybox-create-room>

@@ -1,0 +1,43 @@
+.logs-wrapper {
+	@apply h-full;
+}
+
+.log-list {
+	&__item {
+		@apply my-6 py-1 pl-5;
+		@apply hover:bg-discord-dark hover:bg-opacity-50;
+	}
+}
+
+.log-item {
+	@apply cursor-default;
+
+	&__icon {
+		@apply w-10 h-10 rounded-full overflow-hidden;
+		@apply cursor-pointer select-none;
+	}
+
+	&__content {
+		@apply px-4;
+	}
+}
+
+.content-description {
+	&__name {
+		@apply text-white;
+		@apply hover:underline;
+		@apply cursor-pointer;
+	}
+
+	&__time {
+		@apply opacity-50 text-xs;
+	}
+}
+
+.content-post {
+	a {
+		@apply text-blue-400;
+		@apply hover:underline;
+		@apply cursor-pointer;
+	}
+}

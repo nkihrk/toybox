@@ -1,0 +1,25 @@
+<div class="logs-wrapper" fxLayout="column">
+	<div fxFlex></div>
+
+	<ul class="log-list">
+		<li class="log-list__item" *ngFor="let logItem of logItems">
+			<div class="log-item" fxLayout="row" fxLayoutAlign="start start">
+				<div
+					class="log-item__icon"
+					fxLayout="row"
+					fxLayoutAlign="center center"
+					[ngStyle]="{ 'background-color': logItem.userColor }"
+				>
+					<fa-icon [icon]="faPaw" [fixedWidth]="true" size="lg"></fa-icon>
+				</div>
+				<div class="log-item__content" fxFlex>
+					<div class="content-description" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5rem">
+						<div class="content-description__name">{{ logItem.username }}</div>
+						<div class="content-description__time">{{ logItem.createdAt | date: 'shortTime' }}</div>
+					</div>
+					<div class="content-post">{{ logItem.message }}</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>

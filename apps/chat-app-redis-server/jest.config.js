@@ -1,5 +1,5 @@
 module.exports = {
-	displayName: 'chat-app-redis-server',
+	displayName: 'chat-app-server',
 	preset: '../../jest.preset.js',
 	globals: {
 		'ts-jest': {
@@ -10,5 +10,5 @@ module.exports = {
 		'^.+\\.[tj]s$': 'ts-jest'
 	},
 	moduleFileExtensions: ['ts', 'js', 'html'],
-	coverageDirectory: '../../coverage/apps/chat-app-redis-server'
+	coverageDirectory: '../../coverage/apps/chat-app-server'
 };

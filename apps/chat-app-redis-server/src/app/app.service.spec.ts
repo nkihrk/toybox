@@ -14,8 +14,8 @@ describe('AppService', () => {
 	});
 
 	describe('getData', () => {
-		it('should return "Welcome to chat-app-redis-server!"', () => {
-			expect(service.getData()).toEqual({ message: 'Welcome to chat-app-redis-server!' });
+		it('should return "Welcome to chat-app-server!"', () => {
+			expect(service.getData()).toEqual({ message: 'Welcome to chat-app-server!' });
 		});
 	});
 });

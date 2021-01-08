@@ -1,0 +1,58 @@
+%global-padding {
+	@apply p-2;
+}
+
+.app-title {
+	@extend %global-padding;
+	@apply border-b;
+	@apply border-discord-darkest;
+	@apply hover:bg-discord-light;
+	@apply cursor-pointer;
+
+	&__content {
+		@extend %global-padding;
+		@apply font-bold;
+		@apply select-none;
+	}
+}
+
+.users {
+	@extend %global-padding;
+
+	&__title {
+		@extend %global-padding;
+		@apply pb-0;
+		@apply font-bold opacity-70;
+		@apply select-none;
+	}
+
+	&__list {
+	}
+}
+
+.user-list {
+	&__user-profile {
+		@extend %global-padding;
+		@apply rounded;
+		@apply hover:bg-discord-light;
+		@apply cursor-pointer;
+	}
+}
+
+.user-profile {
+	%common {
+		@apply overflow-hidden;
+		@apply select-none;
+	}
+
+	&__icon {
+		@extend %common;
+		@apply w-8 h-8 rounded-full;
+	}
+
+	&__name {
+		@extend %common;
+		@apply overflow-ellipsis;
+		@apply opacity-80;
+	}
+}

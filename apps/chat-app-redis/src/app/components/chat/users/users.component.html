@@ -1,0 +1,28 @@
+<div class="app-title">
+	<h1 class="app-title__content" fxLayout="row" fxLayoutAlign="space-between center">
+		<span>ChatApp</span>
+		<fa-icon [icon]="faChevronDown" [fixedWidth]="true" size="sm"></fa-icon>
+	</h1>
+</div>
+
+<div class="users">
+	<h1 class="users__title">In Room</h1>
+
+	<div class="users__list">
+		<ul class="user-list">
+			<li class="user-list__user-profile" *ngFor="let user of users | keyvalue">
+				<div class="user-profile" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
+					<div
+						class="user-profile__icon"
+						fxLayout="row"
+						fxLayoutAlign="center center"
+						[ngStyle]="{ 'background-color': user.value.userColor }"
+					>
+						<fa-icon [icon]="faPaw" [fixedWidth]="true" size="sm"></fa-icon>
+					</div>
+					<div class="user-profile__name">{{ user.value.username }}</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

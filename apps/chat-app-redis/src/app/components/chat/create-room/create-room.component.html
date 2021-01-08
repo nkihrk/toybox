@@ -1,0 +1,22 @@
+<div class="screen-wrapper" fxLayout="row" fxLayoutAlign="center center" *ngIf="isCreateRoom">
+	<div class="create-room">
+		<div class="create-room__title">Create a Room</div>
+		<div class="create-room__form">
+			<form class="room-form" #formCheck="ngForm" [formGroup]="createRoomForm">
+				<label class="room-form__name" for="room-name">Room name</label>
+				<ng-container *ngIf="isShowErrors">
+					<div class="room-form__error" [hidden]="!roomNameControl.errors?.required">Name is required</div>
+				</ng-container>
+				<input
+					id="room-name"
+					class="room-form__input"
+					type="text"
+					name="room-name"
+					placeholder="enter a room name"
+					[formControl]="createRoomForm.controls['roomName']"
+				/>
+				<button class="room-form__button" (click)="createRoom()" [disabled]="!isButtonEnabled">create</button>
+			</form>
+		</div>
+	</div>
+</div>

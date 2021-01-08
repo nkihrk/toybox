@@ -1,0 +1,50 @@
+.screen-wrapper {
+	@apply fixed inset-0;
+	@apply bg-black bg-opacity-70;
+}
+
+.create-room {
+	@apply rounded-md overflow-hidden;
+	@apply bg-discord-dark;
+
+	&__title {
+		@apply text-center py-5;
+		@apply bg-discord-darkest font-bold text-white text-xl;
+		@apply select-none;
+	}
+
+	&__form {
+		@apply p-5;
+	}
+}
+
+.room-form {
+	%description-common-style {
+		@apply mb-2;
+		@apply text-sm;
+		@apply select-none;
+	}
+
+	&__name {
+		@extend %description-common-style;
+		@apply block;
+		@apply text-discord-lightest font-bold;
+	}
+
+	&__error {
+		@extend %description-common-style;
+		@apply text-red-600 text-opacity-80;
+	}
+
+	&__input {
+		@apply rounded overflow-hidden mr-2 p-2 w-80;
+		@apply bg-discord-darkest text-sm placeholder-opacity-50 text-discord-lightest;
+		@apply focus:outline-none;
+	}
+
+	&__button {
+		@apply rounded px-6 py-2;
+		@apply bg-blue-500 text-sm font-bold text-discord-lightest font-bold;
+		@apply select-none cursor-pointer;
+	}
+}

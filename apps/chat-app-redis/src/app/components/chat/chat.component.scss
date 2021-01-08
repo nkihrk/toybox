@@ -1,0 +1,34 @@
+.wrapper {
+	@apply h-screen;
+	@apply bg-discord-light text-discord-lightest;
+
+	&__section {
+		&--dark {
+			@apply bg-discord-dark;
+		}
+	}
+}
+
+.chat {
+	&__log {
+		@apply overflow-y-scroll mr-1 pr-1;
+
+		&::-webkit-scrollbar,
+		&::-webkit-scrollbar-track,
+		&::-webkit-scrollbar-thumb {
+			@apply rounded-lg w-2;
+		}
+
+		&::-webkit-scrollbar {
+			@apply bg-discord-thin-dark;
+		}
+
+		&::-webkit-scrollbar-track {
+			@apply bg-transparent;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			@apply bg-discord-darkest;
+		}
+	}
+}

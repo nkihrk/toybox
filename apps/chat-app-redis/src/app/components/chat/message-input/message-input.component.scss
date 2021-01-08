@@ -1,0 +1,10 @@
+.input-container {
+	@apply px-5 pb-6;
+
+	&__input {
+		//@apply w-full bg-discord-thin-light rounded-md p-3 placeholder-opacity-50 resize-none overflow-hidden;
+		@apply w-full rounded-md p-6;
+		@apply bg-discord-thin-light placeholder-opacity-50;
+		@apply focus:outline-none;
+	}
+}
