@@ -4,6 +4,13 @@
 ToyBox is just an experimental monorepo.
 </p>
 
+## Installation
+
+```
+> yarn global add nx
+> yarn install
+```
+
 ## ChatApp
 
 <p>
@@ -11,11 +18,13 @@ ChatApp is a Discord-like small chat app.
 </p>
 
 Used: <br>
+
 ```
 Angular, NestJS, socket.io, helmet, tailwindcss, angular/flex-layout, angular-fontawesome
 ```
 
 How to run:
+
 ```
 > nx run chat-app:serve // frontend
 > nx run chat-app-server:serve // backend
@@ -26,9 +35,7 @@ How to run:
 ![chat-app](./readme_assets/chat-app_1.png)
 ![chat-app](./readme_assets/chat-app_2.png)
 
-
 # License
-
 
 MIT Licence
 
