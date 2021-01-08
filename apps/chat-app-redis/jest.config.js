@@ -1,5 +1,5 @@
 module.exports = {
-	displayName: 'chat-app',
+	displayName: 'chat-app-redis',
 	preset: '../../jest.preset.js',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	globals: {
@@ -11,7 +11,7 @@ module.exports = {
 			}
 		}
 	},
-	coverageDirectory: '../../coverage/apps/chat-app',
+	coverageDirectory: '../../coverage/apps/chat-app-redis',
 	snapshotSerializers: [
 		'jest-preset-angular/build/AngularNoNgAttributesSnapshotSerializer.js',
 		'jest-preset-angular/build/AngularSnapshotSerializer.js',
