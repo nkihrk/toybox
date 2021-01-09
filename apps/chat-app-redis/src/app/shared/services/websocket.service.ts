@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { Observable, NextObserver } from 'rxjs';
-import { JoinRoom, LogItemClient, LogItemServer, Users, User } from '@toybox/chat-app-interfaces';
-
-type On = LogItemServer | Users | User | string;
 
 @Injectable({
 	providedIn: 'root'
@@ -24,13 +21,17 @@ export class WebsocketService {
 		return this.socket;
 	}
 
-	emit($emitName: string, $payload: JoinRoom | LogItemClient | string): void {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	emit($emitName: string, $payload: any): void {
 		this.socket.emit($emitName, $payload);
 	}
 
-	on($onName: string): Observable<On> {
-		const observable = new Observable<On>((observer: NextObserver<On>) => {
-			this.socket.on($onName, ($payload: On) => {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	on($onName: string): Observable<any> {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const observable = new Observable<any>((observer: NextObserver<any>) => {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			this.socket.on($onName, ($payload: any) => {
 				observer.next($payload);
 			});
 		});

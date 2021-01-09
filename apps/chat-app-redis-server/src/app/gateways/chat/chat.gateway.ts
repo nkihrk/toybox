@@ -22,9 +22,7 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 	private rooms: Rooms = {};
 	private users: Users = {};
 
-	constructor(private redisCacheService: RedisCacheService) {
-		this.logger.log(redisCacheService.get('a'));
-	}
+	constructor(private redisCacheService: RedisCacheService) {}
 
 	@SubscribeMessage('messageToServer')
 	handleMessage(@MessageBody() $payload: LogItemClient, @ConnectedSocket() $client: Socket): void {

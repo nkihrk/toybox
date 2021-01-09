@@ -5,10 +5,12 @@ import { Cache } from 'cache-manager';
 export class RedisCacheService {
 	constructor(@Inject(CACHE_MANAGER) private readonly cache: Cache) {}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	async get($key: string): Promise<any> {
 		return await this.cache.get($key);
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	async set($key: string, $value: any): Promise<void> {
 		await this.cache.set($key, $value, 1000);
 	}
