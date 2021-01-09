@@ -11,7 +11,7 @@ import {
 } from '@nestjs/websockets';
 import { Socket, Server } from 'socket.io';
 import { Logger } from '@nestjs/common';
-import { JoinRoom, User, Users, LogItemServer, LogItemClient, Rooms, Room, UserIds } from '@toybox/chat-app-interfaces';
+import { JoinRoom, User, Users, LogItemServer, LogItemClient, Room, UserIds } from '@toybox/chat-app-interfaces';
 import { RedisCacheService } from '../../redis-cache/services/redis-cache.service';
 
 @WebSocketGateway()
@@ -50,6 +50,7 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 		const userIds: UserIds = room.userIds;
 		const userIdsList: string[] = Object.keys(userIds).map(($item: string) => `users:${$item}`);
 		const usersList: User[] = await this.redisCacheService.mget(...userIdsList);
+
 		usersList.forEach(($item: User) => {
 			users[$item.userId] = $item;
 		});
