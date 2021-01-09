@@ -1,20 +1,15 @@
 import { CacheModule, Module } from '@nestjs/common';
 import { RedisCacheService } from './services/redis-cache.service';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as redisStore from 'cache-manager-redis-store';
 
 @Module({
 	imports: [
-		CacheModule.registerAsync({
-			imports: [ConfigModule],
-			inject: [ConfigService],
-			useFactory: async (configService: ConfigService) => ({
-				store: redisStore,
-				host: configService.get('REDIS_HOST'),
-				port: configService.get('REDIS_PORT'),
-				ttl: configService.get('CACHE_TTL'),
-				max: configService.get('MAX_ITEM_IN_CACHE')
-			})
+		CacheModule.register({
+			store: redisStore,
+			host: 'localhost',
+			port: 6379,
+			ttl: 5,
+			max: 1000
 		})
 	],
 	providers: [RedisCacheService],
