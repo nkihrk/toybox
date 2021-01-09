@@ -3,13 +3,18 @@ import { Cache } from 'cache-manager';
 
 @Injectable()
 export class RedisCacheService {
-	private ttl = 3600;
+	private ttl = 86400; // for a whole day
 
 	constructor(@Inject(CACHE_MANAGER) private readonly cache: Cache) {}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	async get($key: string): Promise<any> {
 		return await this.cache.get($key);
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	async mget(...$args: string[]): Promise<any> {
+		return await this.cache.store.mget($args);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -22,7 +22,7 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 
 	constructor(private redisCacheService: RedisCacheService) {
 		// Initialize redis cache
-		this.redisCacheService.reset();
+		//this.redisCacheService.reset();
 	}
 
 	@SubscribeMessage('messageToServer')
@@ -40,29 +40,21 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 		this.server.to(user.roomId).emit('messageToClient', logItem);
 	}
 
-	@SubscribeMessage('getUsers')
-	async getUsers(@ConnectedSocket() $client: Socket): Promise<WsResponse<Users>> {
-		const user: User = await this.redisCacheService.get(`users:${$client.id}`);
-		const roomId: string = user.roomId;
-		const room: Room = await this.redisCacheService.get(`rooms:${roomId}`);
-		const userIds: UserIds = room.userIds;
+	@SubscribeMessage('getRoomInfo')
+	async getRoomInfo(@ConnectedSocket() $client: Socket): Promise<WsResponse<{ users: Users; roomName: string }>> {
 		const users: Users = {};
-
-		for (const userId in userIds) {
-			users[userId] = await this.redisCacheService.get(`users:${userId}`);
-		}
-
-		return { event: 'getUsers', data: users };
-	}
-
-	@SubscribeMessage('getRoomName')
-	async getRoomName(@ConnectedSocket() $client: Socket): Promise<WsResponse<string>> {
 		const user: User = await this.redisCacheService.get(`users:${$client.id}`);
 		const roomId: string = user.roomId;
 		const room: Room = await this.redisCacheService.get(`rooms:${roomId}`);
 		const roomName: string = room.roomName;
+		const userIds: UserIds = room.userIds;
+		const userIdsList: string[] = Object.keys(userIds).map(($item: string) => `users:${$item}`);
+		const usersList: User[] = await this.redisCacheService.mget(...userIdsList);
+		usersList.forEach(($item: User) => {
+			users[$item.userId] = $item;
+		});
 
-		return { event: 'getRoomName', data: roomName };
+		return { event: 'getRoomInfo', data: { users, roomName } };
 	}
 
 	@SubscribeMessage('joinRoom')

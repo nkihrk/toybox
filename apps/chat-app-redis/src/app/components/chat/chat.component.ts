@@ -65,20 +65,14 @@ export class ChatComponent implements OnInit, OnDestroy {
 		this._joinRoom($joinRoom);
 
 		// get all users in the current room
-		this._getUsers();
+		this._getRoomInfo();
 
-		// get a room name
-		this._getRoomName();
-
-		// get data from a server
+		// get room info from a server
 		this.subscriptions.push(
-			this.websocketService.on('getUsers').subscribe(($data: Users) => {
+			this.websocketService.on('getRoomInfo').subscribe(($data: { users: Users; roomName: string }) => {
 				console.log($data);
-				this.users = $data;
-			}),
-			this.websocketService.on('getRoomName').subscribe(($data: string) => {
-				console.log($data);
-				this.roomName = $data;
+				this.users = $data.users;
+				this.roomName = $data.roomName;
 			})
 		);
 
@@ -108,12 +102,8 @@ export class ChatComponent implements OnInit, OnDestroy {
 		this.websocketService.emit('joinRoom', $joinRoom);
 	}
 
-	private _getUsers(): void {
-		this.websocketService.emit('getUsers', '');
-	}
-
-	private _getRoomName(): void {
-		this.websocketService.emit('getRoomName', '');
+	private _getRoomInfo(): void {
+		this.websocketService.emit('getRoomInfo', undefined);
 	}
 
 	private _releaseData(): void {
