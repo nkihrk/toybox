@@ -3,6 +3,8 @@ import { Cache } from 'cache-manager';
 
 @Injectable()
 export class RedisCacheService {
+	private ttl = 3600;
+
 	constructor(@Inject(CACHE_MANAGER) private readonly cache: Cache) {}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -12,7 +14,7 @@ export class RedisCacheService {
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	async set($key: string, $value: any): Promise<void> {
-		await this.cache.set($key, $value, 1000);
+		await this.cache.set($key, $value, { ttl: this.ttl });
 	}
 
 	async reset(): Promise<void> {

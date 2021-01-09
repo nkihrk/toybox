@@ -19,16 +19,17 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 	@WebSocketServer() server: Server;
 
 	private logger: Logger = new Logger('ChatGateway');
-	private rooms: Rooms = {};
-	private users: Users = {};
 
-	constructor(private redisCacheService: RedisCacheService) {}
+	constructor(private redisCacheService: RedisCacheService) {
+		// Initialize redis cache
+		this.redisCacheService.reset();
+	}
 
 	@SubscribeMessage('messageToServer')
-	handleMessage(@MessageBody() $payload: LogItemClient, @ConnectedSocket() $client: Socket): void {
+	async handleMessage(@MessageBody() $payload: LogItemClient, @ConnectedSocket() $client: Socket): Promise<void> {
 		this.logger.log($payload);
 
-		const user: User = this.users[$client.id];
+		const user: User = await this.redisCacheService.get(`users:${$client.id}`);
 		const logItem: LogItemServer = {
 			username: user.username,
 			userColor: user.userColor,
@@ -40,28 +41,32 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 	}
 
 	@SubscribeMessage('getUsers')
-	getUsers(@ConnectedSocket() $client: Socket): WsResponse<Users> {
-		const roomId: string = this.users[$client.id].roomId;
-		const userIds: UserIds = this.rooms[roomId].userIds;
+	async getUsers(@ConnectedSocket() $client: Socket): Promise<WsResponse<Users>> {
+		const user: User = await this.redisCacheService.get(`users:${$client.id}`);
+		const roomId: string = user.roomId;
+		const room: Room = await this.redisCacheService.get(`rooms:${roomId}`);
+		const userIds: UserIds = room.userIds;
 		const users: Users = {};
 
 		for (const userId in userIds) {
-			users[userId] = this.users[userId];
+			users[userId] = await this.redisCacheService.get(`users:${userId}`);
 		}
 
 		return { event: 'getUsers', data: users };
 	}
 
 	@SubscribeMessage('getRoomName')
-	getRoomName(@ConnectedSocket() $client: Socket): WsResponse<string> {
-		const roomId: string = this.users[$client.id].roomId;
-		const roomName: string = this.rooms[roomId].roomName;
+	async getRoomName(@ConnectedSocket() $client: Socket): Promise<WsResponse<string>> {
+		const user: User = await this.redisCacheService.get(`users:${$client.id}`);
+		const roomId: string = user.roomId;
+		const room: Room = await this.redisCacheService.get(`rooms:${roomId}`);
+		const roomName: string = room.roomName;
 
 		return { event: 'getRoomName', data: roomName };
 	}
 
 	@SubscribeMessage('joinRoom')
-	createRoom(@MessageBody() $payload: JoinRoom, @ConnectedSocket() $client: Socket): void {
+	async createRoom(@MessageBody() $payload: JoinRoom, @ConnectedSocket() $client: Socket): Promise<void> {
 		this.logger.log($payload);
 
 		const user: User = {
@@ -71,29 +76,31 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 			icon: '',
 			userColor: '#' + this._getRandomColor()
 		};
-
-		// group the client with a specific room
-		$client.join($payload.roomId, ($error) => {
-			if ($error) this.logger.error($error);
-		});
+		let room: Room = await this.redisCacheService.get(`rooms:${$payload.roomId}`);
 
 		// room
-		if (!this.rooms[$payload.roomId]) {
-			const room: Room = {
+		if (!room) {
+			room = {
 				roomId: $payload.roomId,
 				roomName: $payload.roomName,
 				userIds: {
 					[$client.id]: true
 				}
 			};
-
-			this.rooms[$payload.roomId] = room;
 		} else {
-			this.rooms[$payload.roomId].userIds[$client.id] = true;
+			room.userIds[$client.id] = true;
 		}
 
+		// update a room
+		await this.redisCacheService.set(`rooms:${$payload.roomId}`, room);
+
 		// user
-		this.users[$client.id] = user;
+		await this.redisCacheService.set(`users:${$client.id}`, user);
+
+		// group the client with a specific room
+		$client.join($payload.roomId, ($error) => {
+			if ($error) this.logger.error($error);
+		});
 
 		// broadcast new user
 		this.server.to($payload.roomId).emit('newUserToClient', user);
@@ -103,19 +110,16 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 		this.logger.log('Init');
 	}
 
-	handleDisconnect(@ConnectedSocket() $client: Socket): void {
+	async handleDisconnect(@ConnectedSocket() $client: Socket): Promise<void> {
 		this.logger.log(`Client disconnected: ${$client.id}`);
 
-		const user: User = this.users[$client.id];
+		const user: User = await this.redisCacheService.get(`users:${$client.id}`);
 
 		this.logger.log(`Disconnected user: ${user}`);
 		if (!user) return;
 
-		// remove a specific user from the lists
-		this._removeUserFromLists(user.roomId, user.userId);
-
-		const userIds: UserIds = this.rooms[user.roomId].userIds;
-		if (Object.keys(userIds).length === 0 && userIds.constructor === Object) this._removeRoomFromList(user.roomId);
+		// remove a user and room
+		this._removeUserAndRoom(user);
 
 		// broadcast a user just has been left the room
 		this._broadcastRemoveUser(user.roomId, user.userId);
@@ -125,21 +129,29 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 		this.logger.log(`Client connected: ${$client.id}`);
 	}
 
-	private _generateUniqueId(): string {
-		return Math.random().toString(36).substr(2, 9);
-	}
+	private async _removeUserAndRoom(user: User): Promise<void> {
+		const room: Room = await this.redisCacheService.get(`rooms:${user.roomId}`);
+		delete room.userIds[user.userId];
+		const userIds: UserIds = room.userIds;
 
-	private _removeUserFromLists($roomId: string, $userId: string): void {
-		delete this.rooms[$roomId].userIds[$userId];
-		delete this.users[$userId];
-	}
+		if (Object.keys(userIds).length === 0 && userIds.constructor === Object) {
+			// remove a room
+			await this.redisCacheService.del(`rooms:${user.roomId}`);
+		} else {
+			// remove a userId from the room
+			await this.redisCacheService.set(`rooms:${user.roomId}`, room);
+		}
 
-	private _removeRoomFromList($roomId: string): void {
-		delete this.rooms[$roomId];
+		// remove a user
+		await this.redisCacheService.del(`users:${user.userId}`);
 	}
 
 	private _broadcastRemoveUser($roomId: string, $userId: string): void {
 		this.server.to($roomId).emit('removeUserToClient', $userId);
+	}
+
+	private _generateUniqueId(): string {
+		return Math.random().toString(36).substr(2, 9);
 	}
 
 	private _getRandomColor(): string {
