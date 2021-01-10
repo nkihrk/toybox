@@ -2,7 +2,6 @@ import {
 	SubscribeMessage,
 	WebSocketGateway,
 	ConnectedSocket,
-	WsResponse,
 	MessageBody,
 	WebSocketServer,
 	OnGatewayInit,
@@ -78,7 +77,7 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 			await this.redisCacheService.set(`users:${$client.id}`, user);
 
 			// get all users in the current room
-			const users: Users = await this._getUserInRoom(room.userIds, user);
+			const users: Users = await this._getUsersInRoom(room.userIds, user);
 
 			// group the client with a specific room
 			this._clientJoin($client, $payload.roomId);
@@ -116,7 +115,7 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 		this.logger.log(`Client connected: ${$client.id}`);
 	}
 
-	private async _getUserInRoom($userIds: UserIds, $user: User): Promise<Users> {
+	private async _getUsersInRoom($userIds: UserIds, $user: User): Promise<Users> {
 		const users: Users = {};
 		const userIds: UserIds = $userIds;
 		const userIdsList: string[] = Object.keys(userIds).map(($item: string) => `users:${$item}`);
