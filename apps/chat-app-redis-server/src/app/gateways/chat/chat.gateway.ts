@@ -16,7 +16,7 @@ import { RedisCacheService } from '../../redis-cache/services/redis-cache.servic
 
 @WebSocketGateway()
 export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
-	@WebSocketServer() server: Server;
+	@WebSocketServer() private readonly server: Server;
 
 	private logger: Logger = new Logger('ChatGateway');
 
@@ -29,63 +29,65 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 	async handleMessage(@MessageBody() $payload: LogItemClient, @ConnectedSocket() $client: Socket): Promise<void> {
 		this.logger.log($payload);
 
-		const user: User = await this.redisCacheService.get(`users:${$client.id}`);
-		const logItem: LogItemServer = {
-			username: user.username,
-			userColor: user.userColor,
-			message: $payload.message,
-			createdAt: new Date()
-		};
+		try {
+			const user: User = await this.redisCacheService.get(`users:${$client.id}`);
+			const logItem: LogItemServer = {
+				username: user.username,
+				userColor: user.userColor,
+				message: $payload.message,
+				createdAt: new Date()
+			};
 
-		this.server.to(user.roomId).emit('messageToClient', logItem);
+			this.server.to(user.roomId).emit('messageToClient', logItem);
+		} catch ($error) {
+			this.logger.log($error);
+		}
 	}
 
 	@SubscribeMessage('joinRoom')
 	async createRoom(@MessageBody() $payload: JoinRoom, @ConnectedSocket() $client: Socket): Promise<void> {
 		this.logger.log($payload);
 
-		const user: User = {
-			userId: $client.id,
-			username: 'Guest_' + this._generateUniqueId(),
-			roomId: $payload.roomId,
-			icon: '',
-			userColor: '#' + this._getRandomColor()
-		};
-
-		let room: Room = await this.redisCacheService.get(`rooms:${$payload.roomId}`);
-		// room
-		if (!room) {
-			room = {
+		try {
+			const user: User = {
+				userId: $client.id,
+				username: 'Guest_' + this._generateUniqueId(),
 				roomId: $payload.roomId,
-				roomName: $payload.roomName,
-				userIds: {
-					[$client.id]: true
-				}
+				icon: '',
+				userColor: '#' + this._getRandomColor()
 			};
-		} else {
-			room.userIds[$client.id] = true;
+
+			let room: Room = await this.redisCacheService.get(`rooms:${$payload.roomId}`);
+			// room
+			if (!room) {
+				room = {
+					roomId: $payload.roomId,
+					roomName: $payload.roomName,
+					userIds: {
+						[$client.id]: true
+					}
+				};
+			} else {
+				room.userIds[$client.id] = true;
+			}
+
+			// update a room
+			await this.redisCacheService.set(`rooms:${$payload.roomId}`, room);
+
+			// add new user
+			await this.redisCacheService.set(`users:${$client.id}`, user);
+
+			// get all users in the current room
+			const users: Users = await this._getUserInRoom(room.userIds, user);
+
+			// group the client with a specific room
+			this._clientJoin($client, $payload.roomId);
+
+			// broadcast the room info
+			this.server.to($payload.roomId).emit('roomInfoToClient', { user, users, roomName: $payload.roomName });
+		} catch ($error) {
+			this.logger.log($error);
 		}
-
-		// update a room
-		await this.redisCacheService.set(`rooms:${$payload.roomId}`, room);
-
-		// add new user
-		await this.redisCacheService.set(`users:${$client.id}`, user);
-
-		// get all users in the current room
-		const users: Users = {};
-		const userIds: UserIds = room.userIds;
-		const userIdsList: string[] = Object.keys(userIds).map(($item: string) => `users:${$item}`);
-		const usersList: User[] = await this.redisCacheService.mget(...userIdsList);
-		usersList.forEach(($item: User) => {
-			users[$item.userId] = $item;
-		});
-
-		// group the client with a specific room
-		this._clientJoin($client, $payload.roomId);
-
-		// broadcast the room info
-		this.server.to($payload.roomId).emit('roomInfoToClient', { user, users, roomName: $payload.roomName });
 	}
 
 	afterInit(): void {
@@ -95,19 +97,39 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 	async handleDisconnect(@ConnectedSocket() $client: Socket): Promise<void> {
 		this.logger.log(`Client disconnected: ${$client.id}`);
 
-		const user: User = await this.redisCacheService.get(`users:${$client.id}`);
+		try {
+			const user: User = await this.redisCacheService.get(`users:${$client.id}`);
 
-		if (!user) return;
+			if (!user) return;
 
-		// remove a user and room
-		this._removeUserAndRoom(user);
+			// remove a user and room
+			this._removeUserAndRoom(user);
 
-		// broadcast a user just has been left the room
-		this._broadcastRemoveUser(user.roomId, user.userId);
+			// broadcast a user just has been left the room
+			this._broadcastRemoveUser(user.roomId, user.userId);
+		} catch ($error) {
+			this.logger.log($error);
+		}
 	}
 
 	handleConnection(@ConnectedSocket() $client: Socket): void {
 		this.logger.log(`Client connected: ${$client.id}`);
+	}
+
+	private async _getUserInRoom($userIds: UserIds, $user: User): Promise<Users> {
+		const users: Users = {};
+		const userIds: UserIds = $userIds;
+		const userIdsList: string[] = Object.keys(userIds).map(($item: string) => `users:${$item}`);
+		const usersList: User[] = await this.redisCacheService.mget(...userIdsList);
+		usersList.forEach(($item: User) => {
+			if ($item) {
+				users[$item.userId] = $item;
+			} else {
+				users[$user.userId] = $user;
+			}
+		});
+
+		return users;
 	}
 
 	private _clientJoin($client: Socket, $roomId: string): void {
