@@ -64,22 +64,11 @@ export class ChatComponent implements OnInit, OnDestroy {
 		// join a user to the specific room
 		this._joinRoom($joinRoom);
 
-		// get all users in the current room
-		this._getRoomInfo();
-
-		// get room info from a server
-		this.subscriptions.push(
-			this.websocketService.on('getRoomInfo').subscribe(($data: { users: Users; roomName: string }) => {
-				console.log($data);
-				this.users = $data.users;
-				this.roomName = $data.roomName;
-			})
-		);
-
 		// broadcast listeners
 		this.subscriptions.push(
 			this.websocketService.on('messageToClient').subscribe(($data: LogItemServer) => {
 				console.log($data);
+
 				this.logItems.push($data);
 
 				// scroll to the bottom automatically after getting a message from some users
@@ -87,12 +76,18 @@ export class ChatComponent implements OnInit, OnDestroy {
 					this.chatLogRef.nativeElement.scrollTop = this.chatLogRef.nativeElement.scrollHeight;
 				}, 1);
 			}),
-			this.websocketService.on('newUserToClient').subscribe(($data: User) => {
-				console.log($data);
-				this.users[$data.userId] = $data;
-			}),
+			this.websocketService
+				.on('roomInfoToClient')
+				.subscribe(($data: { user: User; users: Users; roomName: string }) => {
+					console.log($data);
+
+					this.users[$data.user.userId] = $data.user;
+					this.users = $data.users;
+					this.roomName = $data.roomName;
+				}),
 			this.websocketService.on('removeUserToClient').subscribe(($data: string) => {
 				console.log($data);
+
 				delete this.users[$data];
 			})
 		);
@@ -100,10 +95,6 @@ export class ChatComponent implements OnInit, OnDestroy {
 
 	private _joinRoom($joinRoom: JoinRoom): void {
 		this.websocketService.emit('joinRoom', $joinRoom);
-	}
-
-	private _getRoomInfo(): void {
-		this.websocketService.emit('getRoomInfo', undefined);
 	}
 
 	private _releaseData(): void {
